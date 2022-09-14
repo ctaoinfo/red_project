@@ -1,3 +1,3 @@
-module github.com/ctaoinfo/red_project.git
+module red_project
 
 go 1.19
