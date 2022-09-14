@@ -5,10 +5,14 @@
 
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/ctaoinfo/red_project.git/src"
+)
 
 func main() {
 
-	fmt.Println(Init("Zaganor", "Devil", 1, 100, 40))
+	fmt.Println(src.Init("Zaganor", "Devil", 1, 100, 40))
 
 }
