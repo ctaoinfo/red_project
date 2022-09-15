@@ -10,42 +10,17 @@ import (
 )
 
 func (c *Character) TakePot() {
-	var usePot bool = false
 
-	if c.CurrentHealth <= 90 /* ET SI POTION EST DANS INVENTAIRE*/ {
-		usePot = true
+	fmt.Println("Vous avez ", c.CurrentHealth, "HP")
+	if c.CurrentHealth >= c.Health-50 /* ET si il reste potion dans inventaire*/ {
+		c.CurrentHealth = c.Health
+	} else {
+		c.CurrentHealth += 50
 	}
 
-	if usePot {
-		fmt.Println(c.CurrentHealth)
-		switch c.CurrentHealth {
-		case 90:
-			c.CurrentHealth += 10
-			fmt.Println("Vous avez gagné 10 HP")
-			fmt.Println(c.CurrentHealth)
-		case 80:
-			c.CurrentHealth += 20
-			fmt.Println("Vous avez gagné 20 HP")
-			fmt.Println(c.CurrentHealth)
-		case 70:
-			c.CurrentHealth += 30
-			fmt.Println("Vous avez gagné 30 HP")
-			fmt.Println(c.CurrentHealth)
-		case 60:
-			c.CurrentHealth += 40
-			fmt.Println("Vous avez gagné 40 HP")
-			fmt.Println(c.CurrentHealth)
-		default:
-			c.CurrentHealth += 50
-			fmt.Println("Vous avez gagné 50 HP")
-			fmt.Println(c.CurrentHealth)
-		}
-
-		fmt.Println("Tu as utilisé ", c.Inventory[Item-1])
-		c.Inventory = append(c.Inventory[:Item-1], c.Inventory[Item:]...)
-		fmt.Println(c.Inventory)
-	}
-	usePot = false
+	fmt.Println("Tu as utilisé ", c.Inventory[Item-1])
+	c.Inventory = append(c.Inventory[:Item-1], c.Inventory[Item:]...)
+	fmt.Println("Maintenant vous avez ", c.CurrentHealth, "HP")
 }
 
 func (c Character) UseItem() {
