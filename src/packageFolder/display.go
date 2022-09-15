@@ -58,7 +58,7 @@ func (c *Character) AccessInventory() {
 	}
 }
 
-func (c Character) Menu() {
+func (c *Character) Menu() {
 	var choice int
 
 	fmt.Println("---------------------------------")

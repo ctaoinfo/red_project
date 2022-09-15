@@ -17,13 +17,12 @@ func (c *Character) TakePot() {
 	} else {
 		c.CurrentHealth += 50
 	}
-
 	fmt.Println("Tu as utilisé ", c.Inventory[Item-1])
 	c.Inventory = append(c.Inventory[:Item-1], c.Inventory[Item:]...)
 	fmt.Println("Maintenant vous avez ", c.CurrentHealth, "HP")
 }
 
-func (c Character) UseItem() {
+func (c *Character) UseItem() {
 
 	fmt.Println("Quel item utiliser ?")
 

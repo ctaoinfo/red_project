@@ -14,7 +14,6 @@ func main() { // Fonction principal du lancement du projet
 
 	var c1 packageFolder.Character                                                  // Création de la variable qui stop notre premier personnage
 	c1.Init("Zaganor", "Devil", 1, 100, 40, []string{"Potion", "Potion", "Potion"}) // Initialisation du premier personnage
-
 	for gameStart {
 
 		c1.Menu()
