@@ -1,6 +1,6 @@
-package src
+package packageFolder
 
-type Character struct {
+type Character struct { // Strcture
 	Name          string
 	Class         string
 	Level         int
