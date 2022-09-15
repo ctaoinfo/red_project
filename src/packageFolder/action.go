@@ -57,3 +57,23 @@ func (c Character) sellItem() {
 func (c Character) throwItem() {
 
 }
+
+// result := c.Count(c.Inventory)
+// 	for index, itemPresent := range result {
+// 		fmt.Printf("%s %d\n", index, itemPresent)
+
+// 	}
+
+func (c Character) Count(list []string) map[string]int {
+	duplicate := make(map[string]int)
+
+	for _, item := range list {
+		_, exist := duplicate[item]
+		if exist {
+			duplicate[item] += 1
+		} else {
+			duplicate[item] = 1
+		}
+	}
+	return duplicate
+}
