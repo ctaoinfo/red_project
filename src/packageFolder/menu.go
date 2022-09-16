@@ -5,10 +5,13 @@
 
 package packageFolder
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+)
 
 // Variable Global
-var FirstMeet bool = true
+var FirstMeet bool = true // Pour la fonction marchand
 
 func (c *Character) PrincipalMenu() {
 	var choice int
@@ -28,9 +31,11 @@ func (c *Character) PrincipalMenu() {
 	case 4:
 		DisplayQuiSontIls()
 	case 5:
-		return
+		os.Exit(1)
+	default:
+		DisplayErrorSwitch()
+		c.PrincipalMenu()
 	}
-
 }
 
 func (c *Character) AccessInventory() {
@@ -56,13 +61,13 @@ func (c *Character) AccessInventory() {
 
 		}
 	case 2:
-		c.UseItem()
+		c.UseItemPerso()
 
 	case 3:
-		c.ThrowItem()
-
+		// c.RemoveItem([]string{})
 	default:
-		return
+		DisplayErrorSwitch()
+		c.AccessInventory()
 	}
 }
 
@@ -84,9 +89,11 @@ func (c *Character) MenuMerchent() {
 	case 2:
 
 	case 3:
-
+		c.PrincipalMenu()
+	default:
+		DisplayErrorSwitch()
+		c.MenuMerchent()
 	}
-
 }
 
 func (c Character) MenuAchatUtil() {
@@ -96,16 +103,36 @@ func (c Character) MenuAchatUtil() {
 
 	switch choice {
 	case 1:
-		// Ajout d'une potion basic
+		c.AddItem("Potion")
 	case 2:
 		// Ajout d'une potion advanced
 	case 3:
-		// Potion de force
+		// Potion de poison
 	case 4:
 		// Totem réanimation*
+	default:
+		DisplayErrorSwitch()
 	}
 }
 
 func (c Character) MenuAchatWeapon() {
+}
 
+func (c *Character) MenuSpellBook() {
+	var Spell int
+
+	DisplayMenuSpell()
+
+	fmt.Scanln(&Spell)
+
+	switch Spell {
+	case 1:
+		// c.FireBall()
+	case 2:
+		// c.Lightning()
+	case 3:
+		// c.Shield()
+	case 4:
+		// c.Action()
+	}
 }

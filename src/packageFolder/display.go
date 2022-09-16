@@ -9,9 +9,7 @@ import (
 	"fmt"
 )
 
-var Item int
-
-func (c *Character) DisplayInfoPlayer() {
+func (c *Character) DisplayInfoPlayer() { // Affichage information joueur
 
 	fmt.Println("+-----------------------+")
 	fmt.Println("|	Nom : ", c.Name, "	|")
@@ -22,10 +20,20 @@ func (c *Character) DisplayInfoPlayer() {
 	fmt.Println("+-----------------------+")
 	fmt.Println("|	", c.CurrentHealth, "HP sur 100	|")
 	fmt.Println("+-----------------------+")
-
 }
 
-func DisplayInventoryMenu() {
+func DisplayPrincipalMenu() { // Menu Principal
+	fmt.Println("+-------------------------------+")
+	fmt.Println("|	Affichage du menu	|")
+	fmt.Println("+-------------------------------+")
+	fmt.Println("1. Afficher information personnage")
+	fmt.Println("2. Accés à l'inventaire")
+	fmt.Println("3. Accoster le marchand")
+	fmt.Println("4. Qui sont-ils ?")
+	fmt.Println("5. Quitter le jeu")
+}
+
+func DisplayInventoryMenu() { // Affichage menu de l'inventaire
 	fmt.Println("+-------------------------------+")
 	fmt.Println("|	Acces à l'inventaire	|")
 	fmt.Println("+-------------------------------+")
@@ -36,17 +44,7 @@ func DisplayInventoryMenu() {
 	fmt.Println("---------------------------------")
 }
 
-func DisplayPrincipalMenu() { // Menu Principal
-	fmt.Println("+-------------------------------+")
-	fmt.Println("|	Affichage du menu	|")
-	fmt.Println("+-------------------------------+")
-	fmt.Println("1. Afficher information personnage")
-	fmt.Println("2. Accés à l'inventaire")
-	fmt.Println("3. Accoster le marchand")
-	fmt.Println("4. return")
-}
-
-func DisplayMerchentFirstMeet() {
+func DisplayMerchentFirstMeet() { // Affichage Première visite du marchand
 	fmt.Println("Bonjour, je suis le nouveau marchand du coin")
 	fmt.Println("Je peux vous vendre une potion gratuite")
 	fmt.Println("----------------------------")
@@ -62,7 +60,7 @@ func DisplayMerchentMenu() { // Affichage menu du Marchand
 	fmt.Println("3. Retour au menu")
 }
 
-func DisplayListItemUtil() { // Affichage menu liste objet à vendre par le marchand
+func DisplayListItemUtil() { // Affichage menu liste objet (objet utilitaire) à vendre par le marchand
 	fmt.Println("Liste Item Boutique")
 	fmt.Println("1. Potion Soin Basic")
 
@@ -71,12 +69,28 @@ func DisplayListItemUtil() { // Affichage menu liste objet à vendre par le marc
 	fmt.Println("4. Totem de Réanimation")
 }
 
-func DisplayListItemWeapon() {
-
+func DisplayListItemWeapon() { // Affichage menu liste objet (armes) à vendre par le marchand
 }
 
-func DisplayQuiSontIls() {
+func DisplayQuiSontIls() { // Quête Bonus Noms 2 artistes cachés
 	fmt.Println("-")
 	fmt.Println("-")
 	fmt.Println("-")
+}
+
+func (c Character) DisplayPlayerDead() {
+	fmt.Printf("%s à péri\n", c.Name)
+}
+
+func DisplayErrorSwitch() {
+	fmt.Println("Vous avez pas entrer une valeur valide.")
+}
+
+func DisplayMenuSpell() {
+	fmt.Println("Quel sort voulez-vous utiliser ?")
+	fmt.Println("1. Coup de poing")
+	fmt.Println("2. Boule de feu")
+	fmt.Println("3. Bouclier")
+	fmt.Println("4. Eclair")
+	fmt.Println("5. Retour au menu")
 }

@@ -1,5 +1,7 @@
 package packageFolder
 
-func (c Character) RoundFight() {
-
-}
+//	func (c *Character) PlayerDead() {
+//		if c.currentHealth == 0 {
+//			fmt.Println("")
+//		}
+//	}
