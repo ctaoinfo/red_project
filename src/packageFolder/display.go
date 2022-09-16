@@ -42,9 +42,14 @@ func (c *Character) AccessInventory() {
 
 	switch choice {
 	case 1:
-		for _, itemPresent := range c.Inventory {
-			fmt.Println("\t")
-			fmt.Println(itemPresent)
+		// for _, itemPresent := range c.Inventory {
+		// 	fmt.Println("\t")
+		// 	fmt.Println(itemPresent)
+
+		result := c.Count(c.Inventory)
+		for index, itemPresent := range result {
+			fmt.Printf("%s %d\n", index, itemPresent)
+
 		}
 		// fmt.Println(Count(c.Inventory))
 	case 2:
