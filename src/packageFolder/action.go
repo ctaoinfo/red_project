@@ -46,15 +46,15 @@ func (c *Character) UseItem() {
 
 }
 
-func (c Character) buyItem() {
+func (c Character) BuyItem() {
 
 }
 
-func (c Character) sellItem() {
+func (c Character) SellItem() {
 
 }
 
-func (c Character) throwItem() {
+func (c Character) ThrowItem() {
 
 }
 
