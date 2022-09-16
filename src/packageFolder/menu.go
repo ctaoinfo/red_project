@@ -66,7 +66,7 @@ func (c *Character) AccessInventory() {
 	}
 }
 
-func (c Character) MenuMerchent() {
+func (c *Character) MenuMerchent() {
 	var choice int
 
 	if FirstMeet {
@@ -80,11 +80,28 @@ func (c Character) MenuMerchent() {
 
 	switch choice {
 	case 1:
-
+		c.MenuAchatUtil()
 	case 2:
 
 	case 3:
 
 	}
 
+}
+
+func (c Character) MenuAchatUtil() {
+	var choice int
+	DisplayListItemUtil()
+	fmt.Scanln(&choice)
+
+	switch choice {
+	case 1:
+		// Ajout d'une potion basic
+	case 2:
+		// Ajout d'une potion advanced
+	case 3:
+		// Potion de force
+	case 4:
+		// Totem réanimation
+	}
 }

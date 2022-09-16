@@ -46,7 +46,14 @@ func DisplayPrincipalMenu() { // Menu Principal
 	fmt.Println("4. return")
 }
 
-func DisplayMerchentMenu() { // Menu Marchand
+func DisplayMerchentFirstMeet() {
+	fmt.Println("Bonjour, je suis le nouveau marchand du coin")
+	fmt.Println("Je peux vous vendre une potion gratuite")
+	fmt.Println("----------------------------")
+	fmt.Println("Vous aurez la possibilité par la suite d'avoir accés à une boutique \n plus complète au fur et à mesure de votre aventure")
+}
+
+func DisplayMerchentMenu() { // Affichage menu du Marchand
 	fmt.Println("+-------------------------------+")
 	fmt.Println("|	Menu du marchand	|")
 	fmt.Println("+-------------------------------+")
@@ -55,7 +62,7 @@ func DisplayMerchentMenu() { // Menu Marchand
 	fmt.Println("3. Retour au menu")
 }
 
-func DisplayListItemUtil() {
+func DisplayListItemUtil() { // Affichage menu liste objet à vendre par le marchand
 	fmt.Println("Liste Item Boutique")
 	fmt.Println("1. Potion Soin Basic")
 	/*
@@ -70,13 +77,6 @@ func DisplayListItemUtil() {
 
 func DisplayListItemWeapon() {
 
-}
-
-func DisplayMerchentFirstMeet() {
-	fmt.Println("Bonjour, je suis le nouveau marchand du coin")
-	fmt.Println("Je peux vous vendre une potion gratuite")
-	fmt.Println("----------------------------")
-	fmt.Println("Vous aurez la possibilité par la suite d'avoir accés à une boutique \n plus complète au fur et à mesure de votre aventure")
 }
 
 func DisplayQuiSontIls() {
