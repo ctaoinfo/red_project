@@ -26,11 +26,13 @@ func DisplayPrincipalMenu() { // Menu Principal
 	fmt.Println("+-------------------------------+")
 	fmt.Println("|	Affichage du menu	|")
 	fmt.Println("+-------------------------------+")
+
 	fmt.Println("1. Afficher information personnage")
 	fmt.Println("2. Accés à l'inventaire")
 	fmt.Println("3. Accoster le marchand")
-	fmt.Println("4. Qui sont-ils ?")
-	fmt.Println("5. Quitter le jeu")
+	fmt.Println("4. Aller au combat")
+	fmt.Println("5. Qui sont-ils ?")
+	fmt.Println("6. Quitter le jeu")
 }
 
 func DisplayInventoryMenu() { // Affichage menu de l'inventaire

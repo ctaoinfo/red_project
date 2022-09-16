@@ -13,13 +13,15 @@ func main() { // Fonction principal du lancement du projet
 	gameStart := true
 
 	// Initialisation personnage
-	var c1 packageFolder.Character                                                                   // Création de la variable qui stop notre premier personnage
-	c1.Init("Zaganor", "Devil", 1, 100, 40, 100, []string{"Potion", "Potion", "Potion"}, []string{}) // Initialisation du premier personnage
+	var c1 packageFolder.Character
+	var name string
+	var class string                                                                          // Création de la variable qui stop notre premier personnage
+	c1.Init(name, class, 1, 100, 40, 100, []string{"Potion", "Potion", "Potion"}, []string{}) // Initialisation du premier personnage
 
 	// Initialisation Mob
 	/*
 		var m1 packageFolder.Mob
-		m1.InitMob("Zaganor1", "", 1, 100, 40)
+		m1.InitMob("Gragor", "", 1, 100, 40)
 
 		var m2 packageFolder.Mob
 		m2.InitMob("Zaganor2", "Angel", 1, 100, 40)
