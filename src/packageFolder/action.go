@@ -12,14 +12,18 @@ import (
 func (c *Character) TakePot() {
 
 	fmt.Println("Vous avez ", c.CurrentHealth, "HP")
-	if c.CurrentHealth >= c.Health-50 /* ET si il reste potion dans inventaire*/ {
-		c.CurrentHealth = c.Health
+	if c.CurrentHealth == c.Health {
+		fmt.Println("Vous ne pouvez pas utiliser la potion vous avez les HP maximum")
 	} else {
-		c.CurrentHealth += 50
+		if c.CurrentHealth >= c.Health-50 /* ET si il reste potion dans inventaire*/ {
+			c.CurrentHealth = c.Health
+		} else {
+			c.CurrentHealth += 50
+		}
+		fmt.Println("Tu as utilisé ", c.Inventory[Item-1])
+		c.Inventory = append(c.Inventory[:Item-1], c.Inventory[Item:]...)
+		fmt.Println("Maintenant vous avez ", c.CurrentHealth, "HP")
 	}
-	fmt.Println("Tu as utilisé ", c.Inventory[Item-1])
-	c.Inventory = append(c.Inventory[:Item-1], c.Inventory[Item:]...)
-	fmt.Println("Maintenant vous avez ", c.CurrentHealth, "HP")
 }
 
 func (c *Character) UseItem() {

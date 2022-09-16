@@ -18,7 +18,7 @@ func (c *Character) DisplayInfoPlayer() {
 	fmt.Println("+-----------------------+")
 	fmt.Println("|	Niveau : ", c.Level, "	|")
 	fmt.Println("+-----------------------+")
-	fmt.Println("|	Classe : ", c.Class, "	|")
+	fmt.Println("|	Classe : ", c.Class, "|")
 	fmt.Println("+-----------------------+")
 	fmt.Println("|	", c.CurrentHealth, "HP sur 100	|")
 	fmt.Println("+-----------------------+")
