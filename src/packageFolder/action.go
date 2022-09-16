@@ -46,23 +46,13 @@ func (c *Character) UseItem() {
 
 }
 
-func (c Character) BuyItem() {
-
+func (c *Character) AddItem(item string) {
+	c.Inventory = append(c.Inventory, item)
 }
 
-func (c Character) SellItem() {
-
+func (c Character) RemoveItem(item []string) {
+	c.Inventory = append(c.Inventory[:Item-1], c.Inventory[Item:]...)
 }
-
-func (c Character) ThrowItem() {
-
-}
-
-// result := c.Count(c.Inventory)
-// 	for index, itemPresent := range result {
-// 		fmt.Printf("%s %d\n", index, itemPresent)
-
-// 	}
 
 func (c Character) Count(list []string) map[string]int {
 	duplicate := make(map[string]int)
