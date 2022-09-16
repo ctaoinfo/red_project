@@ -102,6 +102,10 @@ func (c Character) MenuAchatUtil() {
 	case 3:
 		// Potion de force
 	case 4:
-		// Totem réanimation
+		// Totem réanimation*
 	}
+}
+
+func (c Character) MenuAchatWeapon() {
+
 }

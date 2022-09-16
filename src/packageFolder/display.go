@@ -65,14 +65,10 @@ func DisplayMerchentMenu() { // Affichage menu du Marchand
 func DisplayListItemUtil() { // Affichage menu liste objet à vendre par le marchand
 	fmt.Println("Liste Item Boutique")
 	fmt.Println("1. Potion Soin Basic")
-	/*
-		if Avancer dans les quêtes  {
-			fmt.Println("2. Potion Soin Avancé")
-			fmt.Println("3. Potion Force")
-		} else if  Avancer dans les quêtes  {
-			fmt.Println("4 . Totem de Réanimation")
-		}
-	*/
+
+	fmt.Println("2. Potion Soin Avancé")
+	fmt.Println("3. Potion Force")
+	fmt.Println("4. Totem de Réanimation")
 }
 
 func DisplayListItemWeapon() {
