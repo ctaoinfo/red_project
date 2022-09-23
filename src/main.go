@@ -8,16 +8,12 @@ package main
 import "src/packageFolder"
 
 // Import du fichier src en ten que dossier de package
-
 func main() { // Fonction principal du lancement du projet
 	gameStart := true
 
 	// Initialisation personnage
 	var c1 packageFolder.Character
-	var name string
-	var class string                                                                          // Création de la variable qui stop notre premier personnage
-	c1.Init(name, class, 1, 100, 40, 100, []string{"Potion", "Potion", "Potion"}, []string{}) // Initialisation du premier personnage
-
+	c1.InitCharCreation()
 	// Initialisation Mob
 	/*
 		var m1 packageFolder.Mob
@@ -42,7 +38,5 @@ func main() { // Fonction principal du lancement du projet
 	for gameStart {
 
 		c1.PrincipalMenu()
-
 	}
-
 }

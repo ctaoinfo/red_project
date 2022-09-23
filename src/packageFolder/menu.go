@@ -19,7 +19,6 @@ func (c *Character) PrincipalMenu() {
 	DisplayPrincipalMenu()
 
 	fmt.Scanln(&choice)
-	fmt.Print("\n")
 
 	switch choice {
 	case 1:
@@ -29,8 +28,10 @@ func (c *Character) PrincipalMenu() {
 	case 3:
 		c.MenuMerchent()
 	case 4:
-		DisplayQuiSontIls()
+		// c.MenuFight()
 	case 5:
+		DisplayQuiSontIls()
+	case 6:
 		os.Exit(1)
 	default:
 		DisplayErrorSwitch()
@@ -47,24 +48,15 @@ func (c *Character) AccessInventory() {
 
 	switch choice {
 	case 1:
-		firstPass := true
-		result := c.Count(c.Inventory)
-		for index, itemPresent := range result {
-			if firstPass {
-				fmt.Println("+----------+")
-				firstPass = false
-			}
-			fmt.Printf("| ")
-			fmt.Printf("%d %s", itemPresent, index)
-			fmt.Println(" |")
-			fmt.Println("+----------+")
-
-		}
+		c.DisplayInventory()
+		c.AccessInventory()
 	case 2:
 		c.UseItemPerso()
 
 	case 3:
-		// c.RemoveItem([]string{})
+		// c.RemoveItem()
+	case 4:
+		c.PrincipalMenu()
 	default:
 		DisplayErrorSwitch()
 		c.AccessInventory()
@@ -76,6 +68,7 @@ func (c *Character) MenuMerchent() {
 
 	if FirstMeet {
 		DisplayMerchentFirstMeet()
+		c.AddItem("Potion")
 		FirstMeet = false
 	}
 
@@ -87,16 +80,18 @@ func (c *Character) MenuMerchent() {
 	case 1:
 		c.MenuAchatUtil()
 	case 2:
-
+		c.MenuAchatSkill()
 	case 3:
-		c.PrincipalMenu()
+		c.DisplayInventory()
+	case 4:
+		c.DisplayInventory()
 	default:
 		DisplayErrorSwitch()
 		c.MenuMerchent()
 	}
 }
 
-func (c Character) MenuAchatUtil() {
+func (c *Character) MenuAchatUtil() {
 	var choice int
 	DisplayListItemUtil()
 	fmt.Scanln(&choice)
@@ -105,34 +100,112 @@ func (c Character) MenuAchatUtil() {
 	case 1:
 		c.AddItem("Potion")
 	case 2:
-		// Ajout d'une potion advanced
+		c.AddItem("AdvancedPotion")
 	case 3:
-		// Potion de poison
+		c.AddItem("ForcePotion")
 	case 4:
-		// Totem réanimation*
+		c.AddItem("PoisonPotion")
 	default:
 		DisplayErrorSwitch()
+		c.MenuAchatUtil()
 	}
 }
 
-func (c Character) MenuAchatWeapon() {
+func (c *Character) MenuAchatWeapon() {
 }
 
-func (c *Character) MenuSpellBook() {
-	var Spell int
+func (c *Character) MenuAchatSkill() {
+	var choice int
+	DisplayListItemUtil()
+	fmt.Scanln(&choice)
 
-	DisplayMenuSpell()
-
-	fmt.Scanln(&Spell)
-
-	switch Spell {
+	switch choice {
 	case 1:
-		// c.FireBall()
+		c.AddSkill("")
 	case 2:
-		// c.Lightning()
+		c.AddSkill("")
 	case 3:
-		// c.Shield()
+		c.AddSkill("")
 	case 4:
-		// c.Action()
+		c.AddSkill("")
+	default:
+		DisplayErrorSwitch()
+		c.MenuAchatUtil()
 	}
+}
+
+func (c *Character) MenuSkillBook() {
+	var skill int
+
+	c.DisplayMenuSkillBook()
+
+	fmt.Scanln(&skill)
+	if c.Class == "Sorcier" {
+		switch skill {
+		case 1:
+			c.FireBall()
+		case 2:
+			c.Lightning()
+		case 3:
+			c.Healing()
+		case 4:
+			c.AccessInventory()
+		}
+	} else if c.Class == "Archer" {
+		switch skill {
+		case 1:
+			c.Arrow()
+		case 2:
+			c.GustArrow()
+		case 3:
+			c.Escape()
+		case 4:
+			c.AccessInventory()
+		}
+	} else if c.Class == "Tank" {
+		switch skill {
+		case 1:
+			c.Punch()
+		case 2:
+			c.HeadButt()
+		case 3:
+			c.Shield()
+		case 4:
+			c.AccessInventory()
+		}
+	} else if c.Class == "ADMIN" {
+		switch skill {
+		case 1:
+			c.Destruction()
+		case 4:
+			c.AccessInventory()
+		}
+	}
+}
+
+func (m *Mob) MenuFight() {
+	var choice int
+
+	DisplayMenuFight()
+
+	fmt.Scanln(&choice)
+
+	switch choice {
+	case 1:
+		m.DisplayInfoEnemy()
+	case 2:
+
+	case 3:
+
+	case 4:
+		// c.PrincipalMenu()
+	default:
+		DisplayErrorSwitch()
+		m.MenuFight()
+
+	}
+	// if c.Inventory["PoisonPot"] == 0 {
+	// 	DisplayFrame("Potion posion inutilisable", []string{
+	// 		"Vous ne pouvez pas utilisez une potion poison car vous n'en avait pas"})
+	// }
 }

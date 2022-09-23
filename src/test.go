@@ -1,23 +1,8 @@
-package main
+// package main
 
-import "fmt"
+// import "fmt"
 
-// func Count(list []string) int {
-// 	for _, s := range list {
-// 		if s == "foo" {
-// 			return 1
-// 		} else if s == "bar" {
-// 			return 2
-// 		}
-// 	}
-// 	return 0
+// func main() {
+// 	inventory := map[string]int{"Potion": 3, "AdvancedPotion": 2}
+// 	fmt.Println("J'ai", inventory["Potion"], "potion de soin dans mon inventaire")
 // }
-// func main () {
-// 	Count([]string{"foo", "bar"})
-// }
-
-func (c *Character) PlayerDead() {
-	if c.currentHealth == 0 {
-		fmt.Println("")
-	}
-}
