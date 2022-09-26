@@ -11,6 +11,7 @@ import (
 )
 
 // Variable Global
+
 var FirstMeet bool = true // Pour la fonction marchand
 
 func (c *Character) PrincipalMenu() {
@@ -52,10 +53,39 @@ func (c *Character) AccessInventory() {
 		c.DisplayInventory()
 		c.AccessInventory()
 	case 2:
+		c.AccessStuffInventory()
+	case 3:
+		c.DisplayMoney()
+	case 4:
 		c.UseItemPerso()
 
-	case 3:
+	case 5:
 		// c.RemoveItem()
+	case 6:
+		c.PrincipalMenu()
+	default:
+		DisplayErrorSwitch()
+		c.AccessInventory()
+	}
+}
+
+func (c *Character) AccessStuffInventory() {
+	var choice int
+
+	c.PlayerDead()
+	DisplayStuffInventory()
+
+	fmt.Scanln(&choice)
+
+	switch choice {
+	case 1:
+		// c.DisplayStuff()
+		c.AccessStuffInventory()
+	case 2:
+		// c.AddStuff
+
+	case 3:
+		// c.RemoveStuff()
 	case 4:
 		c.PrincipalMenu()
 	default:
@@ -86,7 +116,7 @@ func (c *Character) MenuMerchent() {
 	case 3:
 		c.MenuStuff()
 	case 4:
-
+		c.MenuSellItem()
 	case 5:
 		c.DisplayInventory()
 	case 6:
@@ -98,10 +128,28 @@ func (c *Character) MenuMerchent() {
 }
 
 func (c *Character) MenuStuff() {
-
 }
-func (c *Character) MenuSellItem() {
 
+func (c *Character) MenuSellItem() {
+	var choice int
+
+	c.PlayerDead()
+	DisplaySellMenu()
+
+	fmt.Scanln(&choice)
+
+	switch choice {
+	case 1:
+
+		c.RemoveItem()
+	case 5:
+		c.DisplayInventory()
+	case 6:
+		c.PrincipalMenu()
+	default:
+		DisplayErrorSwitch()
+		c.MenuSellItem()
+	}
 }
 
 func (c *Character) MenuAchatUtil() {

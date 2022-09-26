@@ -167,13 +167,37 @@ func (c *Character) AddItem(AddItem string) {
 	}
 }
 
-func (c *Character) RemoveItem(RmItem string) {
+func (c *Character) RemoveItem() {
+	var choice int
+	var RmItem string
+
+	DisplaySellItem()
+	fmt.Scanln(&choice)
+	switch choice {
+	case 1:
+		RmItem = "Potion"
+	case 2:
+		RmItem = "AdvancedPotion"
+	case 3:
+		RmItem = "ForcePotion"
+	case 4:
+		RmItem = "PoisonPotion"
+	}
 	for item := range c.Inventory {
 		if RmItem == item {
 			c.Inventory[RmItem]--
 		} else {
-			c.Inventory[RmItem] = 1
+			c.Inventory[RmItem] = 0
 		}
+	}
+	if RmItem == "Potion" {
+		c.Money += 3
+	} else if RmItem == "AdvancedPotion" {
+		c.Money += 8
+	} else if RmItem == "ForcePotion" {
+		c.Money += 6
+	} else if RmItem == "PoisonPotion" {
+		c.Money += 6
 	}
 }
 

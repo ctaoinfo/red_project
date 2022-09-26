@@ -181,11 +181,20 @@ func DisplayPrincipalMenu() { // Menu Principal
 func DisplayInventoryMenu() { // Affichage menu de l'inventaire
 	DisplayFrame(" Menu Inventaire", []string{
 		"- 1. Afficher inventaire",
-		"- 2. Utiliser un item",
-		"- 3. Jeter un item",
-		"- 4. Retour au menu"})
+		"- 2. Afficher équipement",
+		"- 3. Afficher mon argent",
+		"- 4. Utiliser un item",
+		"- 5. Jeter un item",
+		"- 6. Retour au menu"})
 }
 
+func DisplayStuffInventory() {
+	DisplayFrame(" Menu Equipement", []string{
+		"- 1. Afficher l'équipement détenu",
+		"- 2. Equiper un équipement",
+		"- 3. Déséquiper un équipement",
+		"- 4. Retour au menu"})
+}
 func DisplayMerchentFirstMeet() { // Affichage Première visite du marchand
 	DisplayFrame(" Discour Marchand", []string{
 		"Bonjour, je suis le nouveau marchand du coin",
@@ -314,6 +323,28 @@ func (c *Character) DisplayInventory() {
 	DisplayFrame(" Inventaire", listTxt)
 }
 
+// func (c *Character) DisplayStuff() {
+// 	var txt string
+// 	var listTxt []string
+// 	for i, it := range c.Equipment {
+// 		if i == "WarriorsHat" {
+// 			txt = "Casque du Guerrier"
+// 		} else if i == "WarriorsChestplate" {
+// 			txt = "Plastron du Guerrier"
+// 		} else if i == "WarriorsBoots" {
+// 			txt = "Chaussure du Guerrier"
+// 		}
+// 		listTxt = append(listTxt, "- "+txt+" - "+strconv.Itoa(it)+" disponible")
+
+// 	}
+// 	DisplayFrame(" Inventaire Stuff", listTxt)
+// }
+
+func (c *Character) DisplayMoney() {
+	DisplayFrame("Compte en banque", []string{
+		"Vous avez " + strconv.Itoa(c.Money) + "€"})
+}
+
 func (c *Character) DisplayFullInventory() {
 	DisplayFrame("Inventaire complet", []string{
 		"Vous avez trop d'item dans votre inventaire.",
@@ -369,4 +400,21 @@ func DisplayShield() {
 func DisplayDestruction() {
 	DisplayFrame("Lance Destruction", []string{
 		"Vous avez détruit votre adversaire"})
+}
+
+func DisplaySellItem() {
+	DisplayFrame("Quelle item jeter ?", []string{
+		"- 1. Potion Basic",
+		"- 2. Potion avancée",
+		"- 3. Potion de force",
+		"- 4. Potion de poison",
+		"- 5. Retour"})
+}
+
+func DisplaySellMenu() {
+	DisplayFrame("Que voulez vous jeter ?", []string{
+		"- 1. Un item",
+		// "- 2. Un équipement",
+		"- 5. Afficher l'inventaire",
+		"- 6. Menu Principal"})
 }
