@@ -165,7 +165,7 @@ func (c *Character) DisplayInfoPlayer() { // Affichage information joueur
 		" Nom : " + c.Name,
 		" Niveau : " + strconv.Itoa(c.Level),
 		" Classe : " + c.Class,
-		" " + strconv.Itoa(c.CurrentHealth) + " HP sur 100"})
+		" " + strconv.Itoa(c.CurrentHealth) + " HP sur " + strconv.Itoa(c.Health) + " HP."})
 }
 
 func DisplayPrincipalMenu() { // Menu Principal
@@ -199,9 +199,10 @@ func DisplayMerchentMenu() { // Affichage menu du Marchand
 	DisplayFrame(" Menu Marchand", []string{
 		"- 1. Acheter un objet",
 		"- 2. Acheter un sort",
-		"- 3. Vendre un objet",
-		"- 4. Afficher inventaire",
-		"- 5. Retour au menu"})
+		"- 3. Achat équipement",
+		"- 4. Vendre un objet",
+		"- 5. Afficher inventaire",
+		"- 6. Retour au menu"})
 }
 
 func DisplayListItemUtil() { // Affichage menu liste objet (objet utilitaire) à vendre par le marchand
@@ -219,11 +220,11 @@ func DisplayMenuFight() {
 		"- 4. Retour Menu"})
 }
 
-func (m *Mob) DisplayInfoEnemy() {
+func (mob *Character) DisplayInfoEnemy() {
 	DisplayFrame(" Info Ennemi", []string{
-		" Nom : " + m.Name,
-		" Niveau : " + strconv.Itoa(m.Level),
-		" " + strconv.Itoa(m.CurrentHealth) + " HP sur 100",
+		" Nom : " + mob.Name,
+		" Niveau : " + strconv.Itoa(mob.Level),
+		" " + strconv.Itoa(mob.CurrentHealth) + " HP sur 100",
 		"Puissance caché"})
 }
 
@@ -313,7 +314,14 @@ func (c *Character) DisplayInventory() {
 	DisplayFrame(" Inventaire", listTxt)
 }
 
+func (c *Character) DisplayFullInventory() {
+	DisplayFrame("Inventaire complet", []string{
+		"Vous avez trop d'item dans votre inventaire.",
+		"Vous pouvez en jetez dans le menu inventaire."})
+}
+
 func DisplayFireBall() {
+
 	DisplayFrame("Lance Boulle de feu", []string{
 		"Vous avez infligé x dégats"})
 }

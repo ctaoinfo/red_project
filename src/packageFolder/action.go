@@ -10,7 +10,7 @@ import (
 	"strconv"
 )
 
-func (m *Mob) PoisonPot() {
+func (m *Character) PoisonPot() {
 	DisplayFrame("Dégat Poison", []string{
 		"Vous allez infliger 30 de dégats sur 2 round !",
 		"Il restera " + strconv.Itoa(m.CurrentHealth-15) + "HP au monstre au prochain round",
@@ -32,13 +32,13 @@ func (c *Character) TakePot() {
 		}
 
 	} else {
-		if c.CurrentHealth >= c.Health-50 || c.Inventory["Potion"] > 0 {
+		if c.CurrentHealth >= c.Health-50 && c.Inventory["Potion"] > 0 {
 			c.CurrentHealth = c.Health
 		} else {
-			c.CurrentHealth += 50
+			c.CurrentHealth -= 50
 		}
 		c.Inventory["Potion"] -= 1
-		DisplayFrame(" Soin applique", []string{"Tu as utilise une potion soin basic", "Vous avez a present " + strconv.Itoa(c.CurrentHealth) + "HP"})
+		DisplayFrame(" Soin applique", []string{"Tu as utilisé une potion soin basic", "Vous avez a présent " + strconv.Itoa(c.CurrentHealth) + " HP"})
 	}
 }
 

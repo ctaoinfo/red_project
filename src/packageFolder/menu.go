@@ -15,7 +15,7 @@ var FirstMeet bool = true // Pour la fonction marchand
 
 func (c *Character) PrincipalMenu() {
 	var choice int
-
+	c.PlayerDead()
 	DisplayPrincipalMenu()
 
 	fmt.Scanln(&choice)
@@ -40,8 +40,9 @@ func (c *Character) PrincipalMenu() {
 }
 
 func (c *Character) AccessInventory() {
-
 	var choice int
+
+	c.PlayerDead()
 	DisplayInventoryMenu()
 
 	fmt.Scanln(&choice)
@@ -66,6 +67,7 @@ func (c *Character) AccessInventory() {
 func (c *Character) MenuMerchent() {
 	var choice int
 
+	c.PlayerDead()
 	if FirstMeet {
 		DisplayMerchentFirstMeet()
 		c.AddItem("Potion")
@@ -82,29 +84,48 @@ func (c *Character) MenuMerchent() {
 	case 2:
 		c.MenuAchatSkill()
 	case 3:
-		c.DisplayInventory()
+		c.MenuStuff()
 	case 4:
+
+	case 5:
 		c.DisplayInventory()
+	case 6:
+		c.PrincipalMenu()
 	default:
 		DisplayErrorSwitch()
 		c.MenuMerchent()
 	}
 }
 
+func (c *Character) MenuStuff() {
+
+}
+func (c *Character) MenuSellItem() {
+
+}
+
 func (c *Character) MenuAchatUtil() {
 	var choice int
+
+	c.PlayerDead()
 	DisplayListItemUtil()
 	fmt.Scanln(&choice)
-
+	if c.VerifFullInventory() {
+		c.MenuMerchent()
+	}
 	switch choice {
 	case 1:
 		c.AddItem("Potion")
+		c.Money -= 6
 	case 2:
 		c.AddItem("AdvancedPotion")
+		c.Money -= 16
 	case 3:
 		c.AddItem("ForcePotion")
+		c.Money -= 12
 	case 4:
 		c.AddItem("PoisonPotion")
+		c.Money -= 9
 	default:
 		DisplayErrorSwitch()
 		c.MenuAchatUtil()
@@ -116,6 +137,8 @@ func (c *Character) MenuAchatWeapon() {
 
 func (c *Character) MenuAchatSkill() {
 	var choice int
+
+	c.PlayerDead()
 	DisplayListItemUtil()
 	fmt.Scanln(&choice)
 
@@ -137,6 +160,7 @@ func (c *Character) MenuAchatSkill() {
 func (c *Character) MenuSkillBook() {
 	var skill int
 
+	c.PlayerDead()
 	c.DisplayMenuSkillBook()
 
 	fmt.Scanln(&skill)
@@ -183,16 +207,17 @@ func (c *Character) MenuSkillBook() {
 	}
 }
 
-func (m *Mob) MenuFight() {
+func (c *Character) MenuFight() {
 	var choice int
 
+	c.PlayerDead()
 	DisplayMenuFight()
 
 	fmt.Scanln(&choice)
 
 	switch choice {
 	case 1:
-		m.DisplayInfoEnemy()
+		// mob.DisplayInfoEnemy()
 	case 2:
 
 	case 3:
@@ -201,11 +226,19 @@ func (m *Mob) MenuFight() {
 		// c.PrincipalMenu()
 	default:
 		DisplayErrorSwitch()
-		m.MenuFight()
+		// mob.MenuFight()
 
 	}
 	// if c.Inventory["PoisonPot"] == 0 {
 	// 	DisplayFrame("Potion posion inutilisable", []string{
 	// 		"Vous ne pouvez pas utilisez une potion poison car vous n'en avait pas"})
 	// }
+}
+
+func (c *Character) VerifFullInventory() bool {
+	if len(c.Inventory) > 10 {
+		c.DisplayFullInventory()
+		return true
+	}
+	return false
 }

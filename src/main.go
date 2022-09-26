@@ -14,29 +14,10 @@ func main() { // Fonction principal du lancement du projet
 	// Initialisation personnage
 	var c1 packageFolder.Character
 	c1.InitCharCreation()
-	// Initialisation Mob
-	/*
-		var m1 packageFolder.Mob
-		m1.InitMob("Gragor", "", 1, 100, 40)
-
-		var m2 packageFolder.Mob
-		m2.InitMob("Zaganor2", "Angel", 1, 100, 40)
-
-		var m3 packageFolder.Mob
-		m3.InitMob("Zaganor3", "Angel", 1, 100, 40)
-
-		var m4 packageFolder.Mob
-		m4.InitMob("Zaganor4", "Angel", 1, 100, 40)
-
-		var m5 packageFolder.Mob
-		m5.InitMob("Zaganor5", "Angel", 1, 100, 40)
-
-		var m6 packageFolder.Mob
-		m6.InitMob("Zaganor6", "Angel", 1, 100, 40)
-	*/
 
 	for gameStart {
 
 		c1.PrincipalMenu()
+
 	}
 }
