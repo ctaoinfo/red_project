@@ -1,4 +1,4 @@
-// CHUPIN Tao -- CORBEL Andrea
+// CHUPIN Tao -- TARDELLI Andrea
 // date
 // YTrack Ynov Campus
 // Red Project
@@ -98,6 +98,7 @@ func (c *Character) MenuMerchent() {
 	var choice int
 
 	c.PlayerDead()
+
 	if FirstMeet {
 		DisplayMerchentFirstMeet()
 		c.AddItem("Potion")
@@ -110,11 +111,11 @@ func (c *Character) MenuMerchent() {
 
 	switch choice {
 	case 1:
-		c.MenuAchatUtil()
+		c.MenuBuyUtil()
 	case 2:
-		c.MenuAchatSkill()
+		c.MenuBuySkill()
 	case 3:
-		c.MenuStuff()
+		c.MenuBuyStuff()
 	case 4:
 		c.MenuSellItem()
 	case 5:
@@ -127,7 +128,38 @@ func (c *Character) MenuMerchent() {
 	}
 }
 
-func (c *Character) MenuStuff() {
+func (c *Character) MenuBuyStuff() {
+	var choice int
+
+	c.PlayerDead()
+	DisplayListStuff()
+
+	if c.VerifFullInventoryItems() {
+		c.MenuBuyStuff()
+	}
+	fmt.Scanln(&choice)
+	switch choice {
+	case 1:
+		c.AddItem("PlumeCorbeau")
+		c.Money -= 3
+	case 2:
+		c.AddItem("FourrureLoup")
+		c.Money -= 5
+	case 3:
+		c.AddItem("PeauTroll")
+		c.Money -= 8
+	case 4:
+		c.AddItem("CuirSanglier")
+		c.Money -= 11
+	case 5:
+		c.AddItem("FilAraigne")
+		c.Money -= 15
+	case 6:
+		c.MenuMerchent()
+	default:
+		DisplayErrorSwitch()
+		c.MenuBuyStuff()
+	}
 }
 
 func (c *Character) MenuSellItem() {
@@ -152,13 +184,13 @@ func (c *Character) MenuSellItem() {
 	}
 }
 
-func (c *Character) MenuAchatUtil() {
+func (c *Character) MenuBuyUtil() {
 	var choice int
 
 	c.PlayerDead()
 	DisplayListItemUtil()
 	fmt.Scanln(&choice)
-	if c.VerifFullInventory() {
+	if c.VerifFullInventoryItems() {
 		c.MenuMerchent()
 	}
 	switch choice {
@@ -176,14 +208,14 @@ func (c *Character) MenuAchatUtil() {
 		c.Money -= 9
 	default:
 		DisplayErrorSwitch()
-		c.MenuAchatUtil()
+		c.MenuBuyUtil()
 	}
 }
 
-func (c *Character) MenuAchatWeapon() {
+func (c *Character) MenuBuyWeapon() {
 }
 
-func (c *Character) MenuAchatSkill() {
+func (c *Character) MenuBuySkill() {
 	var choice int
 
 	c.PlayerDead()
@@ -201,7 +233,7 @@ func (c *Character) MenuAchatSkill() {
 		c.AddSkill("")
 	default:
 		DisplayErrorSwitch()
-		c.MenuAchatUtil()
+		c.MenuBuyUtil()
 	}
 }
 
@@ -277,16 +309,22 @@ func (c *Character) MenuFight() {
 		// mob.MenuFight()
 
 	}
-	// if c.Inventory["PoisonPot"] == 0 {
-	// 	DisplayFrame("Potion posion inutilisable", []string{
-	// 		"Vous ne pouvez pas utilisez une potion poison car vous n'en avait pas"})
-	// }
 }
 
-func (c *Character) VerifFullInventory() bool {
-	if len(c.Inventory) > 10 {
+func (c *Character) VerifFullInventoryItems() bool {
+	if len(c.Inventory.Items) <= 10 {
+		return false
+	} else {
 		c.DisplayFullInventory()
 		return true
 	}
-	return false
+}
+
+func (c *Character) VerifFullInventoryEquipment() bool {
+	if len(c.Inventory.Equipment.Chestplate) <= 10 {
+		return false
+	} else {
+		c.DisplayFullInventory()
+		return true
+	}
 }

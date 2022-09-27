@@ -1,5 +1,5 @@
-// CHUPIN Tao -- CORBEL Andrea
-//
+// CHUPIN Tao -- TARDELLI Andrea
+// date
 // YTrack Ynov Campus
 // Red Project
 
@@ -126,6 +126,8 @@ func (c *Character) DisplayUserClass() int {
 	if class == 0 {
 		DisplayErrorClass()
 		c.DisplayUserClass()
+	} else if class == 999 {
+		return class
 	} else if class < 1 || class > 3 {
 		DisplayErrorClass()
 		c.DisplayUserClass()
@@ -221,6 +223,16 @@ func DisplayListItemUtil() { // Affichage menu liste objet (objet utilitaire) à
 		"- 3. Potion Force"})
 }
 
+func DisplayListStuff() {
+	DisplayFrame(" Boutique Equipement", []string{
+		"- 1. Plume de Corbeau - 3€",
+		"- 2. Fourrure de Loup - 5€",
+		"- 3. Peau de Troll - 8€",
+		"- 4. Cuir de Sanglier - 11€",
+		"- 5. Fil d'araigné - 15€",
+		"- 6. Retour au menu"})
+}
+
 func DisplayMenuFight() {
 	DisplayFrame(" Menu Combat", []string{
 		"- 1. Info Ennemi",
@@ -309,36 +321,29 @@ func (c *Character) DisplayInventory() {
 
 	var txt string
 	var listTxt []string
-	for i, it := range c.Inventory {
+	for i, it := range c.Inventory.Items {
 		if i == "Potion" {
 			txt = "Potion Basic"
 		} else if i == "AdvancedPotion" {
 			txt = "Potion Avancé"
 		} else if i == "ForcePotion" {
 			txt = "Potion Force"
+		} else if i == "PlumeCorbeau" {
+			txt = "Plume de Corbeau"
+		} else if i == "FourrureLoup" {
+			txt = "Fourrure de Loup"
+		} else if i == "PeauTroll" {
+			txt = "Peau de Troll"
+		} else if i == "CuirSanglier" {
+			txt = "Cuir de Sanglier"
+		} else if i == "FildAraignee" {
+			txt = "Fil d'Araignée"
 		}
 		listTxt = append(listTxt, "- "+txt+" - "+strconv.Itoa(it)+" disponible")
 
 	}
 	DisplayFrame(" Inventaire", listTxt)
 }
-
-// func (c *Character) DisplayStuff() {
-// 	var txt string
-// 	var listTxt []string
-// 	for i, it := range c.Equipment {
-// 		if i == "WarriorsHat" {
-// 			txt = "Casque du Guerrier"
-// 		} else if i == "WarriorsChestplate" {
-// 			txt = "Plastron du Guerrier"
-// 		} else if i == "WarriorsBoots" {
-// 			txt = "Chaussure du Guerrier"
-// 		}
-// 		listTxt = append(listTxt, "- "+txt+" - "+strconv.Itoa(it)+" disponible")
-
-// 	}
-// 	DisplayFrame(" Inventaire Stuff", listTxt)
-// }
 
 func (c *Character) DisplayMoney() {
 	DisplayFrame("Compte en banque", []string{
