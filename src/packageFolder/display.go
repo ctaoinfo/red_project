@@ -197,6 +197,7 @@ func DisplayStuffInventory() {
 		"- 3. Déséquiper un équipement",
 		"- 4. Retour au menu"})
 }
+
 func DisplayMerchentFirstMeet() { // Affichage Première visite du marchand
 	DisplayFrame(" Discour Marchand", []string{
 		"Bonjour, je suis le nouveau marchand du coin",
@@ -322,6 +323,9 @@ func (c *Character) DisplayInventory() {
 	var txt string
 	var listTxt []string
 	for i, it := range c.Inventory.Items {
+		switch i {
+			case "Potion"
+		}
 		if i == "Potion" {
 			txt = "Potion Basic"
 		} else if i == "AdvancedPotion" {
