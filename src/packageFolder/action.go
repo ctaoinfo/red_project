@@ -24,26 +24,26 @@ func (m *Character) PoisonPot() {
 
 func (c *Character) TakePot() {
 
-	if c.CurrentHealth == c.Health || c.Inventory.Items["Potion"] == 0 {
+	if c.CurrentHealth == c.Health || c.Inventory["Potion"] == 0 {
 		if c.CurrentHealth == c.Health {
 			DisplayFrame(" Soin impossible", []string{"Vous avez " + strconv.Itoa(c.CurrentHealth) + "HP", "Vous ne pouvez pas utiliser la potion vous avez les HP maximum"})
-		} else if c.Inventory.Items["Potion"] == 0 {
+		} else if c.Inventory["Potion"] == 0 {
 			DisplayFrame(" Soin impossible", []string{"Vous avez " + strconv.Itoa(c.CurrentHealth) + "HP", "Vous ne pouvez pas utiliser la potion  car vous en avez plus"})
 		}
 
 	} else {
-		if c.CurrentHealth >= c.Health-50 && c.Inventory.Items["Potion"] > 0 {
+		if c.CurrentHealth >= c.Health-50 && c.Inventory["Potion"] > 0 {
 			c.CurrentHealth = c.Health
 		} else {
 			c.CurrentHealth -= 50
 		}
-		c.Inventory.Items["Potion"] -= 1
+		c.Inventory["Potion"] -= 1
 		DisplayFrame(" Soin applique", []string{"Tu as utilisé une potion soin basic", "Vous avez a présent " + strconv.Itoa(c.CurrentHealth) + " HP"})
 	}
 }
 
 func (c *Character) TakeAdvancedPot() {
-	if c.CurrentHealth == c.Health || c.Inventory.Items["AdvancedPotion"] == 0 {
+	if c.CurrentHealth == c.Health || c.Inventory["AdvancedPotion"] == 0 {
 		if c.CurrentHealth == c.Health {
 			DisplayFrame(" Soin impossible", []string{"Vous avez " + strconv.Itoa(c.CurrentHealth) + "HP", "Vous ne pouvez pas utiliser la potion vous avez les HP maximum"})
 		} else {
@@ -51,12 +51,12 @@ func (c *Character) TakeAdvancedPot() {
 		}
 
 	} else {
-		if c.CurrentHealth >= c.Health-50 || c.Inventory.Items["AdvancedPotion"] > 0 {
+		if c.CurrentHealth >= c.Health-50 || c.Inventory["AdvancedPotion"] > 0 {
 			c.CurrentHealth = c.Health
 		} else {
 			c.CurrentHealth += 100
 		}
-		c.Inventory.Items["AdvancedPotion"] -= 1
+		c.Inventory["AdvancedPotion"] -= 1
 		DisplayFrame(" Soin applique", []string{"Tu as utilise une potion soin basic", "Vous avez a present " + strconv.Itoa(c.CurrentHealth) + "HP"})
 	}
 }
@@ -66,7 +66,7 @@ func (c *Character) UseItemPerso() {
 
 	var index int
 	var txt string
-	for i, it := range c.Inventory.Items {
+	for i, it := range c.Inventory {
 		if i == "Potion" {
 			txt = "Potion soin basic"
 			index = 1
@@ -159,9 +159,9 @@ func (c *Character) Destruction() {
 
 func (c *Character) AddItem(AddItem string) {
 	verif := false
-	for item := range c.Inventory.Items {
+	for item := range c.Inventory {
 		if AddItem == item {
-			c.Inventory.Items[AddItem]++
+			c.Inventory[AddItem]++
 			verif = true
 			break
 		} else {
@@ -169,7 +169,7 @@ func (c *Character) AddItem(AddItem string) {
 		}
 	}
 	if !verif {
-		c.Inventory.Items[AddItem] = 1
+		c.Inventory[AddItem] = 1
 	}
 
 }
@@ -190,11 +190,11 @@ func (c *Character) RemoveItem() {
 	case 4:
 		RmItem = "PoisonPotion"
 	}
-	for item := range c.Inventory.Items {
+	for item := range c.Inventory {
 		if RmItem == item {
-			c.Inventory.Items[RmItem]--
+			c.Inventory[RmItem]--
 		} else {
-			c.Inventory.Items[RmItem] = 0
+			c.Inventory[RmItem] = 0
 		}
 	}
 	if RmItem == "Potion" {
@@ -219,11 +219,11 @@ func (c *Character) AddSkill(AddSkill string) {
 }
 
 func (c *Character) RemoveSkill(RmSkill string) {
-	for skill := range c.Inventory.Items {
+	for skill := range c.Inventory {
 		if RmSkill == skill {
-			c.Inventory.Items[RmSkill]--
+			c.Inventory[RmSkill]--
 		} else {
-			c.Inventory.Items[RmSkill] = 1
+			c.Inventory[RmSkill] = 1
 		}
 	}
 }

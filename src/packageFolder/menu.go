@@ -54,11 +54,13 @@ func (c *Character) AccessInventory() {
 		c.AccessInventory()
 	case 2:
 		c.AccessStuffInventory()
+		c.AccessInventory()
 	case 3:
 		c.DisplayMoney()
+		c.AccessInventory()
 	case 4:
 		c.UseItemPerso()
-
+		c.AccessInventory()
 	case 5:
 		// c.RemoveItem()
 	case 6:
@@ -134,24 +136,46 @@ func (c *Character) MenuBuyStuff() {
 	c.PlayerDead()
 	DisplayListStuff()
 
-	if c.VerifFullInventoryItems() {
-		c.MenuBuyStuff()
+	if !c.VerifFullInventoryItems() {
+		c.DisplayFullInventory()
+		c.MenuMerchent()
 	}
+
 	fmt.Scanln(&choice)
 	switch choice {
 	case 1:
+		if !c.VerifFullInventoryItemsAmount("PlumeCorbeau") {
+			c.DisplayFullInventory()
+			c.MenuMerchent()
+		}
 		c.AddItem("PlumeCorbeau")
 		c.Money -= 3
 	case 2:
+		if !c.VerifFullInventoryItemsAmount("FourrureLoup") {
+			c.DisplayFullInventory()
+			c.MenuMerchent()
+		}
 		c.AddItem("FourrureLoup")
 		c.Money -= 5
 	case 3:
+		if !c.VerifFullInventoryItemsAmount("PeauTroll") {
+			c.DisplayFullInventory()
+			c.MenuMerchent()
+		}
 		c.AddItem("PeauTroll")
 		c.Money -= 8
 	case 4:
+		if !c.VerifFullInventoryItemsAmount("CuirSanglier") {
+			c.DisplayFullInventory()
+			c.MenuMerchent()
+		}
 		c.AddItem("CuirSanglier")
 		c.Money -= 11
 	case 5:
+		if !c.VerifFullInventoryItemsAmount("FilAraigne") {
+			c.DisplayFullInventory()
+			c.MenuMerchent()
+		}
 		c.AddItem("FilAraigne")
 		c.Money -= 15
 	case 6:
@@ -190,22 +214,50 @@ func (c *Character) MenuBuyUtil() {
 	c.PlayerDead()
 	DisplayListItemUtil()
 	fmt.Scanln(&choice)
-	if c.VerifFullInventoryItems() {
+	if !c.VerifFullInventoryItems() {
+		c.DisplayFullInventory()
 		c.MenuMerchent()
 	}
+	if !c.VerifFullInventoryItemsAmount("") {
+		c.DisplayFullInventory()
+		c.MenuMerchent()
+	}
+
 	switch choice {
 	case 1:
+		if !c.VerifFullInventoryItemsAmount("Potion") {
+			c.DisplayFullInventory()
+			c.MenuMerchent()
+		}
 		c.AddItem("Potion")
 		c.Money -= 6
+		DisplayFrame("Achat", []string{"Vous avez acheter une Potion de Soin Basic"})
 	case 2:
+		if !c.VerifFullInventoryItemsAmount("AdvancedPotion") {
+			c.DisplayFullInventory()
+			c.MenuMerchent()
+		}
 		c.AddItem("AdvancedPotion")
 		c.Money -= 16
+		DisplayFrame("Achat", []string{"Vous avez acheter une Potion de Soin Avancée"})
 	case 3:
+		if !c.VerifFullInventoryItemsAmount("ForcePotion") {
+			c.DisplayFullInventory()
+			c.MenuMerchent()
+		}
 		c.AddItem("ForcePotion")
 		c.Money -= 12
+		DisplayFrame("Achat", []string{"Vous avez acheter une Potion de Force"})
 	case 4:
+		if !c.VerifFullInventoryItemsAmount("PosionPotion") {
+			c.DisplayFullInventory()
+			c.MenuMerchent()
+		}
 		c.AddItem("PoisonPotion")
 		c.Money -= 9
+		DisplayFrame("Achat", []string{"Vous avez acheter une Potion de Poison"})
+	case 5:
+		c.PrincipalMenu()
 	default:
 		DisplayErrorSwitch()
 		c.MenuBuyUtil()
@@ -219,7 +271,7 @@ func (c *Character) MenuBuySkill() {
 	var choice int
 
 	c.PlayerDead()
-	DisplayListItemUtil()
+	c.DisplayListSpell()
 	fmt.Scanln(&choice)
 
 	switch choice {
@@ -312,19 +364,8 @@ func (c *Character) MenuFight() {
 }
 
 func (c *Character) VerifFullInventoryItems() bool {
-	if len(c.Inventory.Items) <= 10 {
-		return false
-	} else {
-		c.DisplayFullInventory()
-		return true
-	}
+	return len(c.Inventory) < 10
 }
-
-func (c *Character) VerifFullInventoryEquipment() bool {
-	if len(c.Inventory.Equipment.Chestplate) <= 10 {
-		return false
-	} else {
-		c.DisplayFullInventory()
-		return true
-	}
+func (c *Character) VerifFullInventoryItemsAmount(item string) bool {
+	return c.Inventory[item] < 10
 }

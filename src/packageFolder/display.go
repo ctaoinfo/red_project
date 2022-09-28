@@ -322,14 +322,13 @@ func (c *Character) DisplayInventory() {
 
 	var txt string
 	var listTxt []string
-	for i, it := range c.Inventory.Items {
-		switch i {
-			case "Potion"
-		}
+	for i, it := range c.Inventory {
 		if i == "Potion" {
 			txt = "Potion Basic"
 		} else if i == "AdvancedPotion" {
 			txt = "Potion Avancé"
+		} else if i == "PoisonPotion" {
+			txt = "Potion Poison"
 		} else if i == "ForcePotion" {
 			txt = "Potion Force"
 		} else if i == "PlumeCorbeau" {
