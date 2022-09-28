@@ -75,6 +75,16 @@ func DisplayDescClass() {
 		"- 3. Tank"})
 }
 
+func DisplaySortAchete() {
+	DisplayFrame("Nouveau Sort", []string{
+		"Vous avez obtenu un nouveau sort !"})
+}
+
+// J'adore la bite mon gars
+func DisplaySortDetenu() {
+	DisplayFrame("Sort détenu", []string{"Vous avez déjà le sort."})
+}
+
 func (c *Character) DisplayUserName() string {
 	var name string
 
@@ -252,11 +262,12 @@ func (mob *Character) DisplayInfoEnemy() {
 
 func (c *Character) DisplayListSpell() {
 	if c.Class == "Sorcier" {
-		DisplayFrame(" Boutique Skill", []string{
-			"- 1. Boule de feu",
-			"- 2. Eclair",
-			"- 3. Anneau soin",
-			"- 4. Retour menu"})
+		DisplayFrame(
+			" Boutique Skill", []string{
+				"- 1. Boule de feu",
+				"- 2. Eclair",
+				"- 3. Anneau soin",
+				"- 4. Retour menu"})
 	} else if c.Class == "Archer" {
 		DisplayFrame(" Boutique Skill", []string{
 			"- 1. Flèche",
@@ -265,7 +276,7 @@ func (c *Character) DisplayListSpell() {
 			"- 4. Retour menu"})
 	} else if c.Class == "Tank" {
 		DisplayFrame(" Boutique Skill", []string{
-			"- 1. Coup de poin",
+			"- 1. Coup de poing",
 			"- 2. Coup de tête",
 			"- 3. Bouclier",
 			"- 4. Retour menu"})
@@ -279,7 +290,7 @@ func (c *Character) DisplayListSpell() {
 func DisplayQuiSontIls() { // Quête Bonus Noms 2 artistes cachés
 	DisplayFrame(" Qui sont-ils ?", []string{
 		"- ABBA",
-		"- Steven Spilberg"})
+		"- Steven Spielberg"})
 }
 
 func (c *Character) DisplayPlayerDead() {

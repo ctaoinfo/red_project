@@ -62,7 +62,7 @@ func (c *Character) AccessInventory() {
 		c.UseItemPerso()
 		c.AccessInventory()
 	case 5:
-		// c.RemoveItem()
+		//c.L
 	case 6:
 		c.PrincipalMenu()
 	default:
@@ -218,44 +218,43 @@ func (c *Character) MenuBuyUtil() {
 		c.DisplayFullInventory()
 		c.MenuMerchent()
 	}
-	if !c.VerifFullInventoryItemsAmount("") {
-		c.DisplayFullInventory()
-		c.MenuMerchent()
-	}
-
 	switch choice {
 	case 1:
 		if !c.VerifFullInventoryItemsAmount("Potion") {
 			c.DisplayFullInventory()
 			c.MenuMerchent()
+		} else {
+			c.AddItem("Potion")
+			c.Money -= 6
+			DisplayFrame("Achat", []string{"Vous avez acheter une Potion de Soin Basic"})
 		}
-		c.AddItem("Potion")
-		c.Money -= 6
-		DisplayFrame("Achat", []string{"Vous avez acheter une Potion de Soin Basic"})
 	case 2:
 		if !c.VerifFullInventoryItemsAmount("AdvancedPotion") {
 			c.DisplayFullInventory()
 			c.MenuMerchent()
+		} else {
+			c.AddItem("AdvancedPotion")
+			c.Money -= 16
+			DisplayFrame("Achat", []string{"Vous avez acheter une Potion de Soin Avancée"})
 		}
-		c.AddItem("AdvancedPotion")
-		c.Money -= 16
-		DisplayFrame("Achat", []string{"Vous avez acheter une Potion de Soin Avancée"})
 	case 3:
 		if !c.VerifFullInventoryItemsAmount("ForcePotion") {
 			c.DisplayFullInventory()
 			c.MenuMerchent()
+		} else {
+			c.AddItem("ForcePotion")
+			c.Money -= 12
+			DisplayFrame("Achat", []string{"Vous avez acheter une Potion de Force"})
 		}
-		c.AddItem("ForcePotion")
-		c.Money -= 12
-		DisplayFrame("Achat", []string{"Vous avez acheter une Potion de Force"})
 	case 4:
 		if !c.VerifFullInventoryItemsAmount("PosionPotion") {
 			c.DisplayFullInventory()
 			c.MenuMerchent()
+		} else {
+			c.AddItem("PoisonPotion")
+			c.Money -= 9
+			DisplayFrame("Achat", []string{"Vous avez acheter une Potion de Poison"})
 		}
-		c.AddItem("PoisonPotion")
-		c.Money -= 9
-		DisplayFrame("Achat", []string{"Vous avez acheter une Potion de Poison"})
 	case 5:
 		c.PrincipalMenu()
 	default:
@@ -276,13 +275,13 @@ func (c *Character) MenuBuySkill() {
 
 	switch choice {
 	case 1:
-		c.AddSkill("")
+		c.LivreDeSort("Boule De Feu")
 	case 2:
-		c.AddSkill("")
+		c.LivreDeSort("")
 	case 3:
-		c.AddSkill("")
+		c.LivreDeSort("")
 	case 4:
-		c.AddSkill("")
+		c.LivreDeSort("")
 	default:
 		DisplayErrorSwitch()
 		c.MenuBuyUtil()
@@ -367,5 +366,7 @@ func (c *Character) VerifFullInventoryItems() bool {
 	return len(c.Inventory) < 10
 }
 func (c *Character) VerifFullInventoryItemsAmount(item string) bool {
+
 	return c.Inventory[item] < 10
+
 }

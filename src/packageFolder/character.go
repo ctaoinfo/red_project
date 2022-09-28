@@ -16,6 +16,7 @@ type Character struct { // Strcture du personnage
 	Skill         map[string]int // Compétences
 }
 
+// je mange un fiak la
 func (c *Character) InitPlayer(name string, class string, level int, health int, currentHealth int, money int, inventory map[string]int, skill map[string]int) { // Fonction d'initialisation du personnage
 	c.Name = name
 	c.Class = class
@@ -42,24 +43,18 @@ func (c *Character) CharCreation(name string, class int) {
 	if class == 1 {
 		c.InitPlayer(name, "Sorcier", 1, 120, 60, 150, make(map[string]int), make(map[string]int))
 		c.Inventory["Potion"] = 3
-		c.Skill["FireBall"] = 60
 	} else if class == 2 {
 		c.InitPlayer(name, "Archer", 1, 100, 50, 100, make(map[string]int), make(map[string]int))
 		c.Inventory["Potion"] = 3
-		c.Skill["FireArrow"] = 30
 	} else if class == 3 {
 		c.InitPlayer(name, "Tank", 1, 200, 100, 100, make(map[string]int), make(map[string]int))
 		c.Inventory["Potion"] = 3
-		c.Skill["Punch"] = 40
-		c.Skill["Shield"] = 50
 	} else if class == 999 {
 		c.InitPlayer(name, "ADMIN", 100, 1000, 1000, 9999, make(map[string]int), make(map[string]int))
-		c.Inventory["Potion"] = 99
-		c.Inventory["AdvancedPotion"] = 99
-		c.Inventory["ForcePotion"] = 99
-
+		c.Inventory["Potion"] = 10
+		c.Inventory["AdvancedPotion"] = 10
+		c.Inventory["ForcePotion"] = 10
 	}
-
 }
 
 // func (mob *Character) MobCreation(Round int) {

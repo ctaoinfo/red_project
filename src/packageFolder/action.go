@@ -208,22 +208,21 @@ func (c *Character) RemoveItem() {
 	}
 }
 
-func (c *Character) AddSkill(AddSkill string) {
+func (c *Character) LivreDeSort(AddSkill string) {
+	var verif bool
 	for skill := range c.Skill {
+
 		if AddSkill == skill {
-			c.Skill[AddSkill]++
+			verif = false
+			break
 		} else {
 			c.Skill[AddSkill] = 1
+			verif = true
 		}
-	}
-}
-
-func (c *Character) RemoveSkill(RmSkill string) {
-	for skill := range c.Inventory {
-		if RmSkill == skill {
-			c.Inventory[RmSkill]--
+		if verif {
+			DisplaySortAchete()
 		} else {
-			c.Inventory[RmSkill] = 1
+			DisplaySortDetenu()
 		}
 	}
 }
