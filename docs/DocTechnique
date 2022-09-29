@@ -1,0 +1,46 @@
+Documentation Technique 
+
+
+Phase personnalisation personnage:
+
+Pour commencer notre jeu nous affiche ceci:
+
+
+Nous devons entrer notre nom pour continuer,
+Le nom commencera par une majuscule suivi par des minuscules ne dépassant pas
+15 caractères.
+Ensuite nous allons devoir choisir entre 3 classes:
+- Sorcier
+- Archer
+- Tank
+Celle-ci nous donnerons des stats différentes comme par exemple le max de vie
+
+Menu Principal:
+
+Nous pouvons voir notre menu principal où l'on pourra choisir d'autre menu,
+dans lesquels on aura accés à différentes choses:
+En 1 Afficher les informations de notre personnage c'est à dire :
+    - Le nom
+    - Le niveau
+    - La classe
+    - Et la vie
+En 2 nous allons pouvoir accéder à notre menu inventaire dans le quel on retrouvera :
+    - L'affichage de notre inventaire avec les objets détenus
+    - L'affichage de nos équipements
+    - L'affichage du porte monnaie
+    - L'affichage de mes sorts
+    - Un nouveau menu dans le quel on pourra utiliser un item présent dans notre inventaire
+    - Ainsi que le retour au menu principal
+En 3 nous retrouverons le Marchand qui pour notre première rencontre nous donnera une potion basic gratuite ainsi qu'un menu dans le quel on retrouvera :
+    - Lui acheter un objet
+    - Lui acheter un sort
+    - Lui acheter un équipement
+    - Afficher nos objet présent dans notre inventaire
+    - Puis retourner à notre menu principal
+En 4 nous rencontrerons cette fois-ci le forgeron  qui nous donnera un accès au menu forgeron :
+    -
+    -
+    -
+    -
+    -
+    
