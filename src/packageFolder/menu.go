@@ -172,35 +172,35 @@ func (c *Character) MenuBuyStuff(m *Mob) { // Menu d'achat d'équipement
 			c.MenuMerchent(m)        // Affiche le menu du marchand
 		}
 		c.AddItem("PlumeCorbeau") // Ajoute une plume de corbeau dans l'inventaire du joueur
-		c.UpdateMoney(-36)        // Retire 36 pièces d'or au joueur
+		c.UpdateMoney(-3)        // Retire 36 pièces d'or au joueur
 	case 2: // Si le choix est 2
 		if !c.VerifFullInventoryItemsAmount("FourrureLoup") { // Si l'inventaire du joueur n'est pas plein
 			c.DisplayFullInventory() // Affiche un message d'inventaire plein
 			c.MenuMerchent(m)        // Affiche le menu du marchand
 		}
 		c.AddItem("FourrureLoup") // Ajoute une fourrure de loup dans l'inventaire du joueur
-		c.UpdateMoney(-45)        // Retire 45 pièces d'or au joueur
+		c.UpdateMoney(-4)        // Retire 45 pièces d'or au joueur
 	case 3: // Si le choix est 3
 		if !c.VerifFullInventoryItemsAmount("PeauTroll") { // Si l'inventaire du joueur n'est pas plein
 			c.DisplayFullInventory() // Affiche un message d'inventaire plein
 			c.MenuMerchent(m)        // Affiche le menu du marchand
 		}
 		c.AddItem("PeauTroll") // Ajoute une peau de troll dans l'inventaire du joueur
-		c.UpdateMoney(-32)     // Retire 32 pièces d'or au joueur
+		c.UpdateMoney(-3)     // Retire 32 pièces d'or au joueur
 	case 4: // Si le choix est 4
 		if !c.VerifFullInventoryItemsAmount("CuirSanglier") { // Si l'inventaire du joueur n'est pas plein
 			c.DisplayFullInventory() // Affiche un message d'inventaire plein
 			c.MenuMerchent(m)        // Affiche le menu du marchand
 		}
 		c.AddItem("CuirSanglier") // Ajoute un cuir de sanglier dans l'inventaire du joueur
-		c.UpdateMoney(-28)        // Retire 28 pièces d'or au joueur
+		c.UpdateMoney(-2)        // Retire 28 pièces d'or au joueur
 	case 5: // Si le choix est 5
 		if !c.VerifFullInventoryItemsAmount("FilAraigne") { // Si l'inventaire du joueur n'est pas plein
-			c.DisplayFullInventory() // Affiche un message d'inventaire plein
+			c.DisplayFullInventory() // Affiche un message d'inventaire plein           
 			c.MenuMerchent(m)        // Affiche le menu du marchand
 		}
 		c.AddItem("FilAraigne") // Ajoute un fil d'araignée dans l'inventaire du joueur
-		c.UpdateMoney(-34)      // Retire 34 pièces d'or au joueur
+		c.UpdateMoney(-3)      // Retire 34 pièces d'or au joueur
 	case 6: // Si le choix est 6
 		c.MenuMerchent(m) // Affiche le menu du marchand
 	default: // Si le choix est autre
@@ -305,7 +305,6 @@ func (c *Character) MenuBuyEquipment(m *Mob) { // Menu d'achat d'équipement
 
 func (c *Character) MenuBuySkill(m *Mob) { // Menu d'achat de compétence
 	var choice int // Variable pour le choix
-	fmt.Println("GROSCUL")
 	c.PlayerDead()               // Vérifie si le joueur est mort
 	c.DisplayListBoutiqueSpell() // Affiche la liste des compétences
 	fmt.Scanln(&choice)          // Récupère le choix

@@ -121,21 +121,16 @@ func (c *Character) UpdateMoney(value int) {
 	}
 }
 
-func (c *Character) AddItem(AddItem string) { // fonction ajouter un item
-	verif := false                  // variable verif
-	for item := range c.Inventory { // boucle pour vérifier si l'item est dans l'inventaire
-		if AddItem == item { // si l'item est dans l'inventaire
-			c.Inventory[AddItem]++ // on ajoute 1 à l'item
-			verif = true           // verif = true
-			break                  // on sort de la boucle
-		} else { // si l'item n'est pas dans l'inventaire
-			verif = false // verif = false
-		}
+func (c *Character) AddItem(item string) { // fonction ajouter un item
+	_, ok := c.Inventory[item]
+	if ok && c.VerifFullInventoryItemsAmount(item) {
+		c.Inventory[item]++
+		return
 	}
-	if !verif { // si verif = false
-		c.Inventory[AddItem] = 1 // on ajoute l'item
+	if !c.VerifFullInventoryItems(){
+		DisplayFrame("", []string{})
 	}
-
+	c.Inventory[item] = 1
 }
 
 func (c *Character) RemoveItem(item string, count int) {

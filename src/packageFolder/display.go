@@ -24,12 +24,6 @@ func DisplayFrame(title string, text []string) { // Affichage cadre
 				windowSizeLenght++ // On incrémente la taille de la fenêtre
 			}
 		}
-		if len(title) > len(word) && len(title) > windowSizeLenght { // Si la taille du titre est plus grande que la taille du mot et que la taille du titre est plus grande que la taille de la fenêtre
-			windowSizeLenght = 0                                       // On remet la taille de la fenêtre à 0
-			for i := 0; i <= uniseg.GraphemeClusterCount(title); i++ { // On parcours le titre
-				windowSizeLenght++ // On incrémente la taille de la fenêtre
-			}
-		}
 	}
 	windowSizeLenght += 5                   // On ajoute 5 à la taille de la fenêtre
 	fmt.Printf("╒")                         // On affiche le coin supérieur gauche
@@ -67,6 +61,17 @@ func DisplayFrame(title string, text []string) { // Affichage cadre
 }
 
 func DisplayDescName() { // Affichage description nom
+	fmt.Printf(` 	 _     _  
+	| |   (_) 
+	| |__  _  ___ _ ____   _____  _ __ _   _  ___ 
+	| '_ \| |/ _ \ '_ \ \ / / _ \' _  | | | |/ _ \
+	| |_) | |  __/ | | \ V /  __/ | | | |_| |  __/
+	|_.__/|_|\___|_| |_|\_/ \___|_| |_|\__,_|\___|`) 
+	fmt.Printf("\n\n")
+
+	fmt.Println(`	░▒█▀▀▀░█▀▀░█▀▄░░▀░░▄░░░▄░█▀▀
+	░▒█▀▀▀░▀▀▄░█░░░░█▀░░█▄█░░█▀▀
+	░▒█▄▄▄░▀▀▀░▀▀▀░▀▀▀░░░▀░░░▀▀▀`)
 	DisplayFrame(" Personnalisation du pseudo", []string{ // Affichage cadre personnalisation nom
 		"Votre pseudo doit comporter une majuscule en première lettre",
 		"Suivi par des minuscules",
@@ -107,7 +112,6 @@ func CheckName(name *string) bool { // Vérification nom
 
 func (c *Character) DisplayUserName() string { // Affichage nom
 	var name string          // Nom
-	DisplayImageAsciiDebut() // Affichage image ascii début
 
 	DisplayDescName() // Affichage description nom
 
@@ -212,7 +216,7 @@ func DisplayMenuStuffInventory() { // Affichage menu équipement inventaire
 }
 
 func DisplayMerchentFirstMeet() { // Affichage Première visite du marchand
-	DisplayFrame(" Discour Marchand", []string{ // Affichage cadre première visite du marchand
+	DisplayFrame(" Discours Marchand", []string{ // Affichage cadre première visite du marchand
 		"Bonjour, je suis le nouveau marchand du coin",
 		"Je vous ai donné une potion gratuite aller voir votre inventaire",
 		"Vous aurez la possibilité par la suite d'avoir",
@@ -538,16 +542,6 @@ func DisplayFuir() { // Affichage fuir
 		"Vous avez fuit le combat",
 		"Vous avez perdu 10 de votre argent",
 		"Vous avez réapparu avec la moitié de votre vie max"})
-}
-
-func DisplayImageAsciiDebut() { // Affichage image ascii début
-	DisplayFrame("", []string{ // Affichage cadre image ascii début
-		" _     _   ",
-		"| |   (_)  ",
-		"| |__  _  ___ _ ____   _____ _ __  _   _  ___ ",
-		"| '_ \\| |/ _ \\ '_ \\ \\ / / _ \\ '_ \\| | | |/ _ \\",
-		"| |_) | |  __/ | | \\ V /  __/ | | | |_| |  __/",
-		"|_.__/|_|\\___|_| |_|\\_/ \\___|_| |_|\\__,_|\\___|"})
 }
 
 func DisplayImageAsciiFin() { // Affichage image ascii fin
