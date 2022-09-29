@@ -3,21 +3,22 @@
 // YTrack Ynov Campus
 // RedProject
 
-package main
+package main // Package mains
 
-import "src/packageFolder"
+import "src/packageFolder" // Importation du package
 
-// Import du fichier src en ten que dossier de package
+// Import du fichier src en tant que dossier de package
 func main() { // Fonction principal du lancement du projet
-	gameStart := true
+	gameStart := true // Variable jeu commencer
 
 	// Initialisation personnage
-	var c1 packageFolder.Character
-	c1.InitCharCreation()
+	var c1 packageFolder.Character // Création du personnage
+	c1.InitCharCreation()          // Initialisation de la création du personnage
 
-	for gameStart {
+	var m1 packageFolder.Mob // Création du mob
+	m1.InitMobCreation(1)    // Initialisation de la création du mob
 
-		c1.PrincipalMenu()
-
+	for gameStart { // Boucle de jeu
+		c1.PrincipalMenu(&m1) // Menu principal
 	}
 }
