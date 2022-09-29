@@ -157,66 +157,6 @@ func (c *Character) Destruction() { // fonction destruction
 // 	}
 // }
 
-func (c *Character) AddItem(AddItem string) { // fonction ajouter un item
-	verif := false                  // variable verif
-	for item := range c.Inventory { // boucle pour vérifier si l'item est dans l'inventaire
-		if AddItem == item { // si l'item est dans l'inventaire
-			c.Inventory[AddItem]++ // on ajoute 1 à l'item
-			verif = true           // verif = true
-			break                  // on sort de la boucle
-		} else { // si l'item n'est pas dans l'inventaire
-			verif = false // verif = false
-		}
-	}
-	if !verif { // si verif = false
-		c.Inventory[AddItem] = 1 // on ajoute l'item
-	}
-
-}
-
-func (c *Character) RemoveItem() { // fonction retirer un item
-	var choice int    // variable choix
-	var RmItem string // variable retirer un item
-
-	DisplaySellItem()   // affichage vendre un item
-	fmt.Scanln(&choice) // scan du choix
-	switch choice {     // switch du choix
-	case 1: // si le choix est 1
-		RmItem = "Potion" // retirer un item = potion
-	case 2: // si le choix est 2
-		RmItem = "AdvancedPotion" // retirer un item = potion avancé
-	case 3: // si le choix est 3
-		RmItem = "ForcePotion" // retirer un item = potion de force
-	case 4: // si le choix est 4
-		RmItem = "PoisonPotion" // retirer un item = potion de poison
-	}
-	for item := range c.Inventory { // boucle pour vérifier si l'item est dans l'inventaire
-		if RmItem == item { // si l'item est dans l'inventaire
-			c.Inventory[RmItem]-- // on retire 1 à l'item
-		} else { // si l'item n'est pas dans l'inventaire
-			c.Inventory[RmItem] = 0 // on retire l'item
-		}
-	}
-	if RmItem == "Potion" { // si retirer un item = potion
-		c.Money += 3 // on ajoute 3 au money
-	} else if RmItem == "AdvancedPotion" { // si retirer un item = potion avancé
-		c.Money += 8 // on ajoute 8 au money
-	} else if RmItem == "ForcePotion" { // si retirer un item = potion de force
-		c.Money += 6 // on ajoute 6 au money
-	} else if RmItem == "PoisonPotion" { // si retirer un item = potion de poison
-		c.Money += 6 // on ajoute 6 au money
-	}
-}
-
-func (c *Character) spellBook(nom string) { // fonction livre de sort
-	if c.Skill[nom] == 0 { // si le sort n'est pas appris
-		c.Skill[nom] += 1     // on apprend le sort
-		c.Inventory[nom] -= 1 // on retire 1 au sort
-	} else { // si le sort est appris
-		DisplayFrame("Sort", []string{"Vous avez déjà appris ce sort !"}) // affichage vous avez déjà appris ce sort
-	}
-}
-
 // func (m *Mob) BouleDeFeu() {
 // 	fmt.Println("Vous utilisez Boule de feu !")
 // 	m.CurrentHealth -= 20

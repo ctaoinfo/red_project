@@ -122,8 +122,6 @@ func (c *Character) MenuMerchent(m *Mob) { // Menu du marchand
 		c.MenuBuySkill(m) // Affiche le menu d'achat de compétence
 	case 3: // Si le choix est 3
 		c.MenuBuyStuff(m) // Affiche le menu d'achat d'équipement
-	case 4: // Si le choix est 4
-		c.MenuSellItem(m) // Affiche le menu de vente d'item
 	case 5: // Si le choix est 5
 		c.DisplayInventory() // Affiche l'inventaire du joueur
 	case 6: // Si le choix est 6
@@ -146,7 +144,7 @@ func (c *Character) MenuForgeron(m *Mob) { // Menu du forgeron
 	case 1: // Si le choix est 1
 		c.MenuBuyEquipment(m) // Affiche le menu d'achat d'équipement
 	case 2: // Si le choix est 2
-		c.AccessInventory(m) // Affiche le menu de l'inventaire
+		c.DisplayInventory() // Affiche le menu de l'inventaire
 	case 3: // Si le choix est 3
 		c.PrincipalMenu(m) // Affiche le menu principal
 	default: // Si le choix est autre
@@ -174,61 +172,40 @@ func (c *Character) MenuBuyStuff(m *Mob) { // Menu d'achat d'équipement
 			c.MenuMerchent(m)        // Affiche le menu du marchand
 		}
 		c.AddItem("PlumeCorbeau") // Ajoute une plume de corbeau dans l'inventaire du joueur
-		c.Money -= 36             // Retire 36 pièces d'or au joueur
+		c.UpdateMoney(-36)        // Retire 36 pièces d'or au joueur
 	case 2: // Si le choix est 2
 		if !c.VerifFullInventoryItemsAmount("FourrureLoup") { // Si l'inventaire du joueur n'est pas plein
 			c.DisplayFullInventory() // Affiche un message d'inventaire plein
 			c.MenuMerchent(m)        // Affiche le menu du marchand
 		}
 		c.AddItem("FourrureLoup") // Ajoute une fourrure de loup dans l'inventaire du joueur
-		c.Money -= 45             // Retire 45 pièces d'or au joueur
+		c.UpdateMoney(-45)        // Retire 45 pièces d'or au joueur
 	case 3: // Si le choix est 3
 		if !c.VerifFullInventoryItemsAmount("PeauTroll") { // Si l'inventaire du joueur n'est pas plein
 			c.DisplayFullInventory() // Affiche un message d'inventaire plein
 			c.MenuMerchent(m)        // Affiche le menu du marchand
 		}
 		c.AddItem("PeauTroll") // Ajoute une peau de troll dans l'inventaire du joueur
-		c.Money -= 32          // Retire 32 pièces d'or au joueur
+		c.UpdateMoney(-32)     // Retire 32 pièces d'or au joueur
 	case 4: // Si le choix est 4
 		if !c.VerifFullInventoryItemsAmount("CuirSanglier") { // Si l'inventaire du joueur n'est pas plein
 			c.DisplayFullInventory() // Affiche un message d'inventaire plein
 			c.MenuMerchent(m)        // Affiche le menu du marchand
 		}
 		c.AddItem("CuirSanglier") // Ajoute un cuir de sanglier dans l'inventaire du joueur
-		c.Money -= 28             // Retire 11 pièces d'or au joueur
+		c.UpdateMoney(-28)        // Retire 28 pièces d'or au joueur
 	case 5: // Si le choix est 5
 		if !c.VerifFullInventoryItemsAmount("FilAraigne") { // Si l'inventaire du joueur n'est pas plein
 			c.DisplayFullInventory() // Affiche un message d'inventaire plein
 			c.MenuMerchent(m)        // Affiche le menu du marchand
 		}
 		c.AddItem("FilAraigne") // Ajoute un fil d'araignée dans l'inventaire du joueur
-		c.Money -= 34           // Retire 15 pièces d'or au joueur
+		c.UpdateMoney(-34)      // Retire 34 pièces d'or au joueur
 	case 6: // Si le choix est 6
 		c.MenuMerchent(m) // Affiche le menu du marchand
 	default: // Si le choix est autre
 		DisplayErrorSwitch() // Affiche un message d'erreur
 		c.MenuBuyStuff(m)    // Affiche le menu d'achat d'équipement
-	}
-}
-
-func (c *Character) MenuSellItem(m *Mob) { // Menu de vente d'item
-	var choice int // Variable pour le choix
-
-	c.PlayerDead()    // Vérifie si le joueur est mort
-	DisplaySellMenu() // Affiche le menu de vente d'item
-
-	fmt.Scanln(&choice) // Récupère le choix
-
-	switch choice { // Switch pour le choix
-	case 1: // Si le choix est 1
-		c.RemoveItem() // Retire un item de l'inventaire du joueur
-	case 5: // Si le choix est 5
-		c.DisplayInventory() // Affiche l'inventaire du joueur
-	case 6: // Si le choix est 6
-		c.PrincipalMenu(m) // Affiche le menu principal
-	default: // Si le choix est autre
-		DisplayErrorSwitch() // Affiche un message d'erreur
-		c.MenuSellItem(m)    // Affiche le menu de vente d'item
 	}
 }
 
@@ -249,7 +226,7 @@ func (c *Character) MenuBuyUtil(m *Mob) { // Menu d'achat d'utilitaire
 			c.MenuMerchent(m)        // Affiche le menu du marchand
 		} else { // Si l'inventaire du joueur est plein
 			c.AddItem("Potion")                                                           // Ajoute une potion dans l'inventaire du joueur
-			c.Money -= 6                                                                  // Retire 6 pièces d'or au joueur
+			c.UpdateMoney(-6)                                                             // Retire 6 pièces d'or au joueur
 			DisplayFrame("Achat", []string{"Vous avez acheter une Potion de Soin Basic"}) // Affiche un message de confirmation
 		}
 	case 2: // Si le choix est 2
@@ -258,7 +235,7 @@ func (c *Character) MenuBuyUtil(m *Mob) { // Menu d'achat d'utilitaire
 			c.MenuMerchent(m)        // Affiche le menu du marchand
 		} else { // Si l'inventaire du joueur est plein
 			c.AddItem("AdvancedPotion")                                                     // Ajoute une potion dans l'inventaire du joueur
-			c.Money -= 16                                                                   // Retire 16 pièces d'or au joueur
+			c.UpdateMoney(-16)                                                              // Retire 16 pièces d'or au joueur
 			DisplayFrame("Achat", []string{"Vous avez acheter une Potion de Soin Avancée"}) // Affiche un message de confirmation
 		}
 	case 3: // Si le choix est 3
@@ -267,7 +244,7 @@ func (c *Character) MenuBuyUtil(m *Mob) { // Menu d'achat d'utilitaire
 			c.MenuMerchent(m)        // Affiche le menu du marchand
 		} else { // Si l'inventaire du joueur est plein
 			c.AddItem("ForcePotion")                                                 // Ajoute une potion dans l'inventaire du joueur
-			c.Money -= 12                                                            // Retire 12 pièces d'or au joueur
+			c.UpdateMoney(-12)                                                       // Retire 12 pièces d'or au joueur
 			DisplayFrame("Achat", []string{"Vous avez acheter une Potion de Force"}) // Affiche un message de confirmation
 		}
 	case 4: // Si le choix est 4
@@ -276,7 +253,7 @@ func (c *Character) MenuBuyUtil(m *Mob) { // Menu d'achat d'utilitaire
 			c.MenuMerchent(m)        // Affiche le menu du marchand
 		} else { // Si l'inventaire du joueur est plein
 			c.AddItem("PoisonPotion")                                                 // Ajoute une potion dans l'inventaire du joueur
-			c.Money -= 9                                                              // Retire 9 pièces d'or au joueur
+			c.UpdateMoney(-9)                                                         // Retire 9 pièces d'or au joueur
 			DisplayFrame("Achat", []string{"Vous avez acheter une Potion de Poison"}) // Affiche un message de confirmation
 		}
 	case 5: // Si le choix est 5
@@ -297,14 +274,14 @@ func (c *Character) MenuBuyEquipment(m *Mob) { // Menu d'achat d'équipement
 	switch choice { // Switch pour le choix
 	case 1: // Si le choix est 1
 		if c.Money >= 10 { // Si le joueur a assez d'argent
-			c.Money -= 10         // Retire 10 pièces d'or au joueur
+			c.UpdateMoney(-10)    // Retire 10 pièces d'or au joueur
 			c.Forgeron(choice, m) // Affiche le menu du forgeron
 		} else { // Si le joueur n'a pas assez d'argent
 			DisplayFrame("Achat", []string{"Vous n'avez pas assez d'argent"}) // Affiche un message d'erreur
 		}
 	case 2: // Si le choix est 2
 		if c.Money >= 15 { // Si le joueur a assez d'argent
-			c.Money -= 15         // Retire 15 pièces d'or au joueur
+			c.UpdateMoney(-15)    // Retire 15 pièces d'or au joueur
 			c.Forgeron(choice, m) // Affiche le menu du forgeron
 
 		} else { // Si le joueur n'a pas assez d'argent
@@ -312,7 +289,7 @@ func (c *Character) MenuBuyEquipment(m *Mob) { // Menu d'achat d'équipement
 		}
 	case 3: // Si le choix est 3
 		if c.Money >= 20 { // Si le joueur a assez d'argent
-			c.Money -= 20         // Retire 20 pièces d'or au joueur
+			c.UpdateMoney(-20)    // Retire 20 pièces d'or au joueur
 			c.Forgeron(choice, m) // Affiche le menu du forgeron
 
 		} else { // Si le joueur n'a pas assez d'argent
@@ -328,7 +305,7 @@ func (c *Character) MenuBuyEquipment(m *Mob) { // Menu d'achat d'équipement
 
 func (c *Character) MenuBuySkill(m *Mob) { // Menu d'achat de compétence
 	var choice int // Variable pour le choix
-
+	fmt.Println("GROSCUL")
 	c.PlayerDead()               // Vérifie si le joueur est mort
 	c.DisplayListBoutiqueSpell() // Affiche la liste des compétences
 	fmt.Scanln(&choice)          // Récupère le choix
@@ -336,16 +313,14 @@ func (c *Character) MenuBuySkill(m *Mob) { // Menu d'achat de compétence
 	if c.Class == "Sorcier" { // Si le joueur est un sorcier
 		switch choice { // Switch pour le choix
 		case 1: // Si le choix est 1
-			c.spellBook("Boule de feu")     // Ajoute la compétence dans le grimoire du joueur
+			c.SpellBook("Boulefeu")         // Ajoute la compétence dans le grimoire du joueur
 			c.DisplaySortObtenuBouleDeFeu() // Affiche un message de confirmation
 		case 2: // Si le choix est 2
-			c.spellBook("Eclair")       // Ajoute la compétence dans le grimoire du joueur
+			c.SpellBook("Eclair")       // Ajoute la compétence dans le grimoire du joueur
 			c.DisplaySortObtenuEclair() // Affiche un message de confirmation
 		case 3: // Si le choix est 3
-			c.spellBook("Anneau soin")      // Ajoute la compétence dans le grimoire du joueur
+			c.SpellBook("AnneauSoin")       // Ajoute la compétence dans le grimoire du joueur
 			c.DisplaySortObtenuAnneauSoin() // Affiche un message de confirmation
-		case 4: // Si le choix est 4
-			c.spellBook("") // Ajoute la compétence dans le grimoire du joueur
 		default: // Si le choix est autre
 			DisplayErrorSwitch() // Affiche un message d'erreur
 			c.MenuBuyUtil(m)     // Affiche le menu d'achat de compétence
@@ -353,16 +328,14 @@ func (c *Character) MenuBuySkill(m *Mob) { // Menu d'achat de compétence
 	} else if c.Class == "Archer" { // Si le joueur est un archer
 		switch choice { // Switch pour le choix
 		case 1: // Si le choix est 1
-			c.spellBook("Flèche")       // Ajoute la compétence dans le grimoire du joueur
+			c.SpellBook("Fleche")       // Ajoute la compétence dans le grimoire du joueur
 			c.DisplaySortObtenuFleche() // Affiche un message de confirmation
 		case 2: // Si le choix est 2
-			c.spellBook("Rafale flèche") // Ajoute la compétence dans le grimoire du joueur
-			c.DisplaySortObtenuRafale()  // Affiche un message de confirmation
+			c.SpellBook("RafaleFleche") // Ajoute la compétence dans le grimoire du joueur
+			c.DisplaySortObtenuRafale() // Affiche un message de confirmation
 		case 3: // Si le choix est 3
-			c.spellBook("Escive")        // Ajoute la compétence dans le grimoire du joueur
+			c.SpellBook("Escive")        // Ajoute la compétence dans le grimoire du joueur
 			c.DisplaySortObtenuEsquive() // Affiche un message de confirmation
-		case 4: // Si le choix est 4
-			c.spellBook("") // Ajoute la compétence dans le grimoire du joueur
 		default: // Si le choix est autre
 			DisplayErrorSwitch() // Affiche un message d'erreur
 			c.MenuBuyUtil(m)     // Affiche le menu d'achat de compétence
@@ -370,16 +343,14 @@ func (c *Character) MenuBuySkill(m *Mob) { // Menu d'achat de compétence
 	} else if c.Class == "Tank" { // Si le joueur est un tank
 		switch choice { // Switch pour le choix
 		case 1: // Si le choix est 1
-			c.spellBook("Coup de poing")     // Ajoute la compétence dans le grimoire du joueur
+			c.SpellBook("CoupPoing")         // Ajoute la compétence dans le grimoire du joueur
 			c.DisplaySortObtenuCoupDePoing() // Affiche un message de confirmation
 		case 2: // Si le choix est 2
-			c.spellBook("Coup de tête")     // Ajoute la compétence dans le grimoire du joueur
+			c.SpellBook("CoupTete")         // Ajoute la compétence dans le grimoire du joueur
 			c.DisplaySortObtenuCoupDeTete() // Affiche un message de confirmation
 		case 3: // Si le choix est 3
-			c.spellBook("Bouclier")       // Ajoute la compétence dans le grimoire du joueur
+			c.SpellBook("Bouclier")       // Ajoute la compétence dans le grimoire du joueur
 			c.DisplaySortObtenuBouclier() // Affiche un message de confirmation
-		case 4: // Si le choix est 4
-			c.spellBook("") // Ajoute la compétence dans le grimoire du joueur
 		default: // Si le choix est autre
 			DisplayErrorSwitch() // Affiche un message d'erreur
 			c.MenuBuyUtil(m)     // Affiche le menu d'achat de compétence
@@ -404,33 +375,51 @@ func (c *Character) MenuSkillBook(m *Mob) { // Menu du grimoire
 	if c.Class == "Sorcier" { // Si le joueur est un sorcier
 		switch skill { // Switch pour le choix
 		case 1: // Si le choix est 1
-			c.FireBall() // Lance la compétence
+			if c.HasSkill("Boulefeu") {
+				c.FireBall() // Lance la compétnce
+			}
 		case 2: // Si le choix est 2
-			c.Lightning() // Lance la compétence
+			if c.HasSkill("Eclair") {
+				c.Lightning() // Lance la compétence
+			}
 		case 3: // Si le choix est 3
-			c.Healing() // Lance la compétence
+			if c.HasSkill("AnneauSoin") {
+				c.Healing() // Lance la compétence
+			}
 		case 4: // Si le choix est 4
 			c.AccessInventory(m) // Affiche l'inventaire du joueur
 		}
 	} else if c.Class == "Archer" { // Si le joueur est un archer
 		switch skill { // Switch pour le choix
 		case 1: // Si le choix est 1
-			c.Arrow() // Lance la compétence
+			if c.HasSkill("Fleche") {
+				c.Arrow() // Lance la compétence
+			}
 		case 2: // Si le choix est 2
-			c.GustArrow() // Lance la compétence
+			if c.HasSkill("RafaleFleche") {
+				c.GustArrow() // Lance la compétence
+			}
 		case 3: // Si le choix est 3
-			c.Escape() // Lance la compétence
+			if c.HasSkill("Escive") {
+				c.Escape() // Lance la compétence
+			}
 		case 4: // Si le choix est 4
 			c.AccessInventory(m) // Affiche l'inventaire du joueur
 		}
 	} else if c.Class == "Tank" { // Si le joueur est un tank
 		switch skill { // Switch pour le choix
 		case 1: // Si le choix est 1
-			c.Punch() // Lance la compétence
+			if c.HasSkill("CoupPoing") {
+				c.Punch() // Lance la compétence
+			}
 		case 2: // Si le choix est 2
-			c.HeadButt() // Lance la compétence
+			if c.HasSkill("CoupTete") {
+				c.HeadButt() // Lance la compétence
+			}
 		case 3: // Si le choix est 3
-			c.Shield() // Lance la compétence
+			if c.HasSkill("Bouclier") {
+				c.Shield() // Lance la compétence
+			}
 		case 4: // Si le choix est 4
 			c.AccessInventory(m) // Affiche l'inventaire du joueur
 		}
@@ -461,7 +450,7 @@ func (m *Mob) MenuFight(c *Character) { // Menu de combat
 		DisplayFuir()                  // Affiche un message de fuite
 		c.CurrentHealth = c.Health / 2 // Met la vie du joueur à la moitié
 		c.PrincipalMenu(m)             // Affiche le menu principal
-		c.Money -= 20                  // Retire 20 pièces d'or au joueur
+		c.UpdateMoney(-20)             // Retire 20 pièces d'or au joueur
 	case 4: // Si le choix est 4
 		c.AccessInventory(m) // Affiche l'inventaire du joueur
 	default: // Si le choix est autre
@@ -470,19 +459,3 @@ func (m *Mob) MenuFight(c *Character) { // Menu de combat
 
 	}
 }
-
-func (c *Character) VerifFullInventoryItems() bool { // Vérifie si l'inventaire est plein
-	return len(c.Inventory) < 10 // Retourne vrai si l'inventaire est plein
-}
-
-func (c *Character) VerifFullInventoryItemsAmount(item string) bool { // Vérifie si l'inventaire est plein
-
-	return c.Inventory[item] < 10 // Retourne vrai si l'inventaire est plein
-
-}
-
-// func (c Character) SpellBook() {
-// 	for index, sp := range c.Skill {
-// 		// Hmmmmm bonne grosse bite entre les orteils la
-// 	}
-// }

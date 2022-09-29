@@ -8,19 +8,24 @@ package packageFolder
 import (
 	"fmt"
 	"strconv"
-	"strings"
 
 	"github.com/rivo/uniseg"
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
 )
 
 func DisplayFrame(title string, text []string) { // Affichage cadre
-	windowSizeLenght := 0       // Taille de la fenêtre
+	windowSizeLenght := 0 // Taille de la fenêtre
+
 	for _, word := range text { // Parcours du tableau de texte
-		if len(word) > windowSizeLenght || len(title) > windowSizeLenght { // Si la taille du mot est plus grande que la taille de la fenêtre
+		if len(word) > windowSizeLenght { // Si la taille du mot est plus grande que la taille de la fenêtre
 			windowSizeLenght = 0                                      // On remet la taille de la fenêtre à 0
 			for i := 0; i <= uniseg.GraphemeClusterCount(word); i++ { // On parcours le mot
 				windowSizeLenght++ // On incrémente la taille de la fenêtre
 			}
+		}
+		if len(title) > len(word) && len(title) > windowSizeLenght { // Si la taille du titre est plus grande que la taille du mot et que la taille du titre est plus grande que la taille de la fenêtre
+			windowSizeLenght = 0                                       // On remet la taille de la fenêtre à 0
 			for i := 0; i <= uniseg.GraphemeClusterCount(title); i++ { // On parcours le titre
 				windowSizeLenght++ // On incrémente la taille de la fenêtre
 			}
@@ -88,14 +93,16 @@ func DisplaySortDetenu() { // Affichage sort détenu
 	DisplayFrame("Sort détenu", []string{"Vous avez déjà le sort."}) // Affichage cadre sort détenu
 }
 
-func (c *Character) CheckName(name *string) bool { // Vérification nom
+func CheckName(name *string) bool { // Vérification nom
 	for _, letter := range *name { // Parcours du nom
 		if !(letter >= 'a' && letter <= 'z' || letter >= 'A' && letter <= 'Z') { // Si la lettre n'est pas comprise entre a et z ou A et Z
 			return false // On retourne faux
 		}
 	}
-	*name = strings.Title(*name) // On met la première lettre en majuscule
-	return true                  // On retourne vrai
+	caser := cases.Title(language.English)
+
+	*name = caser.String(*name) // On met la première lettre en majuscule et le reste en minuscule
+	return true                 // On retourne vrai
 }
 
 func (c *Character) DisplayUserName() string { // Affichage nom
@@ -110,7 +117,7 @@ func (c *Character) DisplayUserName() string { // Affichage nom
 		if len(name) >= 15 { // Si la taille du nom est supérieur ou égale à 15
 			DisplayErrorNameLen() // On affiche l'erreur de taille du nom
 			c.DisplayUserName()   // On relance la fonction
-		} else if c.CheckName(&name) { // Sinon si le nom est correct
+		} else if CheckName(&name) { // Sinon si le nom est correct
 			return name // On retourne le nom
 		} else {
 			DisplayErrorName()  // On affiche l'erreur de nom
@@ -150,6 +157,11 @@ func DisplayError() { // Affichage erreur
 	DisplayFrame("Erreur", []string{ // Affichage cadre erreur
 		"Erreur Système,",
 		"Recommencez"})
+}
+
+func (c *Character) DisplayNoMoney() {
+	DisplayFrame("Pas d'argent", []string{
+		"Vous n'avais pas asser d'argent"})
 }
 
 func DisplayErrorClass() { // Affichage erreur classe
@@ -213,9 +225,8 @@ func DisplayMerchentMenu() { // Affichage menu du Marchand
 		"- 1. Acheter un objet",
 		"- 2. Acheter un sort",
 		"- 3. Achat équipement",
-		"- 4. Vendre un objet",
-		"- 5. Afficher inventaire",
-		"- 6. Retour au menu"})
+		"- 4. Afficher inventaire",
+		"- 5. Retour au menu"})
 }
 
 func DisplayListItemUtil() { // Affichage menu liste objet (objet utilitaire) à vendre par le marchand
@@ -227,11 +238,11 @@ func DisplayListItemUtil() { // Affichage menu liste objet (objet utilitaire) à
 
 func DisplayListStuff() { // Affichage menu liste équipement à vendre par le marchand
 	DisplayFrame(" Boutique Equipement", []string{ // Affichage cadre liste équipement à vendre par le marchand
-		"- 1. Plume de Corbeau - 3€",
-		"- 2. Fourrure de Loup - 5€",
-		"- 3. Peau de Troll - 8€",
-		"- 4. Cuir de Sanglier - 11€",
-		"- 5. Fil d'araigné - 15€",
+		"- 1. Plume de Corbeau - 36€",
+		"- 2. Fourrure de Loup - 45€",
+		"- 3. Peau de Troll - 32€",
+		"- 4. Cuir de Sanglier -28€",
+		"- 5. Fil d'araigné - 34€",
 		"- 6. Retour au menu"})
 }
 
@@ -296,9 +307,9 @@ func DisplayErrorSwitch() { // Affichage message erreur switch
 func (c *Character) DisplayMenuSkillBook() { // Affichage menu livre de sort
 
 	if c.Class == "Sorcier" { // Si la classe est sorcier
-		var txt string           // Déclaration variable txt
-		var listTxt []string     // Déclaration variable listTxt
-		for i := range c.Skill { // Boucle pour afficher les sorts du joueur
+		var txt string               // Déclaration variable txt
+		var listTxt []string         // Déclaration variable listTxt
+		for _, i := range c.Skills { // Boucle pour afficher les sorts du joueur
 			if i == "Boule de feu" { // Si le sort est boule de feu
 				txt = "1 - Utiliser Boule de feu" // Affichage du sort
 			} else if i == "Eclair" { // Si le sort est eclair
@@ -308,11 +319,11 @@ func (c *Character) DisplayMenuSkillBook() { // Affichage menu livre de sort
 			}
 			listTxt = append(listTxt, txt) // Ajout du sort dans la liste
 		}
-		DisplayFrame(" Liste sort", listTxt) // Affichage cadre liste sort
+		DisplayFrame(" Liste sort Sorcier", listTxt) // Affichage cadre liste sort
 	} else if c.Class == "Archer" { // Si la classe est archer
 		var txt string               // Déclaration variable txt
 		var listTxt []string         // Déclaration variable listTxt
-		for i := range c.Inventory { // Boucle pour afficher les sorts du joueur
+		for _, i := range c.Skills { // Boucle pour afficher les sorts du joueur
 			if i == "Tire flèche" { // Si le sort est tire flèche
 				txt = "1 - Utiliser Tire flèche" // Affichage du sort
 			} else if i == "Rafale" { // Si le sort est rafale
@@ -322,11 +333,11 @@ func (c *Character) DisplayMenuSkillBook() { // Affichage menu livre de sort
 			}
 			listTxt = append(listTxt, txt) // Ajout du sort dans la liste
 		}
-		DisplayFrame(" Liste sort", listTxt) // Affichage cadre liste sort
+		DisplayFrame(" Liste sort Archer", listTxt) // Affichage cadre liste sort
 	} else if c.Class == "Tank" { // Si la classe est tank
 		var txt string               // Déclaration variable txt
 		var listTxt []string         // Déclaration variable listTxt
-		for i := range c.Inventory { // Boucle pour afficher les sorts du joueur
+		for _, i := range c.Skills { // Boucle pour afficher les sorts du joueur
 			if i == "Coup de poing" { // Si le sort est coup de poing
 				txt = "1 - Coup de poing" // Affichage du sort
 			} else if i == "Coup de tête" { // Si le sort est coup de tête
@@ -336,9 +347,9 @@ func (c *Character) DisplayMenuSkillBook() { // Affichage menu livre de sort
 			}
 			listTxt = append(listTxt, txt) // Ajout du sort dans la liste
 		}
-		DisplayFrame(" Liste sort", listTxt) // Affichage cadre liste sort
+		DisplayFrame(" Liste sort Tank", listTxt) // Affichage cadre liste sort
 	} else if c.Class == "ADMIN" { // Si la classe est ADMIN
-		DisplayFrame(" Liste sort", []string{ // Affichage cadre liste sort
+		DisplayFrame(" Liste sort ADMIN", []string{ // Affichage cadre liste sort
 			"- 1. Destruction",
 			"- 4. Retour au menu"})
 	}
@@ -369,10 +380,10 @@ func (c *Character) DisplayInventory() { // Affichage inventaire
 			txt = "Fil d'Araignée" // Affichage de l'objet Fil d'Araignée
 		}
 		listTxt = append(listTxt, "- "+txt+" - "+strconv.Itoa(it)+" disponible") // Ajout de l'objet dans la liste
-	}
-	DisplayFrame(" Inventaire", listTxt) // Affichage cadre inventaire
-}
 
+		DisplayFrame(" Inventaire", listTxt) // Affichage cadre inventaire
+	}
+}
 func (c *Character) DisplayMoney() { // Affichage argent
 	DisplayFrame("Compte en banque", []string{ // Affichage cadre argent
 		"Vous avez " + strconv.Itoa(c.Money) + "€"})
@@ -386,7 +397,7 @@ func (c *Character) DisplayFullInventory() { // Affichage inventaire complet
 
 func DisplayFireBall() { // Affichage boule de feu
 
-	DisplayFrame("Lance Boulle de feu", []string{ // Affichage cadre boule de feu
+	DisplayFrame("Lance Boule de feu", []string{ // Affichage cadre boule de feu
 		"Vous avez infligé x dégats"})
 }
 
@@ -397,7 +408,7 @@ func DisplayLightning() { // Affichage éclair
 
 func DisplayHealing() {
 	DisplayFrame("Lance Soin", []string{ // Affichage cadre soin
-		"Vous avez infligé x dégats"})
+		"Vous avez soigné x points de vie"})
 }
 
 func DisplayArrow() { // Affichage flèche
